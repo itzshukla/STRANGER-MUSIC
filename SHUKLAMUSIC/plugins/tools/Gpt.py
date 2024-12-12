@@ -1,5 +1,5 @@
 import requests
-from SHIKLAMUSIC import app
+from SHUKLAMUSIC import app
 from pyrogram.types import Message
 from pyrogram.enums import ChatAction, ParseMode
 from pyrogram import filters
