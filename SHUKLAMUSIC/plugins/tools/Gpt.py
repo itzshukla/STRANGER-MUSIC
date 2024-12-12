@@ -1,109 +1,80 @@
-import asyncio
-import base64
-import mimetypes
-import os
-from pyrogram import filters, types as t
-from lexica import AsyncClient
-from SHUKLAMUSIC import app
-from lexica.constants import languageModels
-from typing import Union, Tuple
+import requests
+from SHIKLAMUSIC import app
+from pyrogram.types import Message
+from pyrogram.enums import ChatAction, ParseMode
+from pyrogram import filters
 
-# Use typing.Union for compatibility with Python versions < 3.10
-async def ChatCompletion(prompt, model) -> Union[Tuple[str, list], str]:
+API_KEY = "abacf43bf0ef13f467283e5bc03c2e1f29dae4228e8c612d785ad428b32db6ce"
+
+BASE_URL = "https://api.together.xyz/v1/chat/completions"
+
+@app.on_message(
+    filters.command(
+        ["chatgpt", "ai", "ask", "gpt", "solve"],
+        prefixes=["+", ".", "/", "-", "", "$", "#", "&"],
+    )
+)
+async def chat_gpt(bot, message):
     try:
-        modelInfo = getattr(languageModels, model)
-        client = AsyncClient()
-        output = await client.ChatCompletion(prompt, modelInfo)
-        if model == "bard":
-            return output['content'], output['images']
-        return output['content']
-    except Exception as E:
-        raise Exception(f"API error: {E}")
+        # Typing action when the bot is processing the message
+        await bot.send_chat_action(message.chat.id, ChatAction.TYPING)
 
-async def geminiVision(prompt, model, images) -> Union[Tuple[str, list], str]:
-    imageInfo = []
-    for image in images:
-        with open(image, "rb") as imageFile:
-            data = base64.b64encode(imageFile.read()).decode("utf-8")
-            mime_type, _ = mimetypes.guess_type(image)
-            imageInfo.append({
-                "data": data,
-                "mime_type": mime_type
-            })
-        os.remove(image)
-    payload = {
-        "images": imageInfo
-    }
-    modelInfo = getattr(languageModels, model)
-    client = AsyncClient()
-    output = await client.ChatCompletion(prompt, modelInfo, json=payload)
-    return output['content']['parts'][0]['text']
-
-def getMedia(message):
-    """Extract Media"""
-    media = message.media if message.media else message.reply_to_message.media if message.reply_to_message else None
-    if message.media:
-        if message.photo:
-            media = message.photo
-        elif message.document and message.document.mime_type in ['image/png', 'image/jpg', 'image/jpeg'] and message.document.file_size < 5242880:
-            media = message.document
+        if len(message.command) < 2:
+            # If no question is asked, send an example message
+            await message.reply_text(
+                "❍ ᴇxᴀᴍᴘʟᴇ:**\n\n/chatgpt ᴡʜᴏ ɪs ᴛʜᴇ ᴏᴡɴᴇʀ ᴏғ ˹ sᴛʀᴀɴɢᴇʀ ™˼?"
+            )
         else:
-            media = None
-    elif message.reply_to_message and message.reply_to_message.media:
-        if message.reply_to_message.photo:
-            media = message.reply_to_message.photo
-        elif message.reply_to_message.document and message.reply_to_message.document.mime_type in ['image/png', 'image/jpg', 'image/jpeg'] and message.reply_to_message.document.file_size < 5242880:
-            media = message.reply_to_message.document
-        else:
-            media = None
-    else:
-        media = None
-    return media
+            # Extract the query from the user's message
+            query = message.text.split(' ', 1)[1]
+            print("Input query:", query)  # Debug input
 
-def getText(message):
-    """Extract Text From Commands"""
-    text_to_return = message.text
-    if message.text is None:
-        return None
-    if " " in text_to_return:
-        try:
-            return message.text.split(None, 1)[1]
-        except IndexError:
-            return None
-    else:
-        return None
+            # Set up headers with Authorization and Content-Type
+            headers = {
+                "Authorization": f"Bearer {API_KEY}",
+                "Content-Type": "application/json"
+            }
 
-@app.on_message(filters.command(["gpt", "bard", "llama", "mistral", "palm", "gemini"]))
-async def chatbots(_, m: t.Message):
-    prompt = getText(m)
-    media = getMedia(m)
-    if media is not None:
-        return await askAboutImage(_, m, [media], prompt)
-    if prompt is None:
-        return await m.reply_text("Hello, How can I assist you today?")
-    model = m.command[0].lower()
-    output = await ChatCompletion(prompt, model)
-    if model == "bard":
-        output, images = output
-        if len(images) == 0:
-            return await m.reply_text(output)
-        media = []
-        for i in images:
-            media.append(t.InputMediaPhoto(i))
-        media[0] = t.InputMediaPhoto(images[0], caption=output)
-        await _.send_media_group(
-            m.chat.id,
-            media,
-            reply_to_message_id=m.id
-        )
-        return
-    await m.reply_text(output['parts'][0]['text'] if model == "gemini" else output)
+            # Prepare the payload with the correct model and user message
+            payload = {
+                "model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",  # Change model if needed
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": query  # User's question from the message
+                    }
+                ]
+            }
 
-async def askAboutImage(_, m: t.Message, mediaFiles: list, prompt: str):
-    images = []
-    for media in mediaFiles:
-        image = await _.download_media(media.file_id, file_name=f'./downloads/{m.from_user.id}_ask.jpg')
-        images.append(image)
-    output = await geminiVision(prompt if prompt else "What's this?", "geminiVision", images)
-    await m.reply_text(output)
-    
+            # Send the POST request to the API
+            response = requests.post(BASE_URL, json=payload, headers=headers)
+
+            # Debugging: print raw response
+            print("API Response Text:", response.text)  # Print raw response
+            print("Status Code:", response.status_code)  # Check the status code
+
+            # If the response is empty or not successful, handle the error
+            if response.status_code != 200:
+                await message.reply_text(f"❍ ᴇʀʀᴏʀ: API request failed. Status code: {response.status_code}")
+            elif not response.text.strip():
+                await message.reply_text("❍ ᴇʀʀᴏʀ: API se koi valid data nahi mil raha hai. Response was empty.")
+            else:
+                # Attempt to parse the JSON response
+                try:
+                    response_data = response.json()
+                    print("API Response JSON:", response_data)  # Debug response JSON
+
+                    # Get the assistant's response from the JSON data
+                    if "choices" in response_data and len(response_data["choices"]) > 0:
+                        result = response_data["choices"][0]["message"]["content"]
+                        await message.reply_text(
+                            f"{result} \n\nＡɴsᴡᴇʀᴇᴅ ʙʏ➛[˹ sᴛʀᴀɴɢᴇʀ-ᴍᴜsɪᴄ ™˼](https://t.me/SHIVANSH474)",
+                            parse_mode=ParseMode.MARKDOWN
+                        )
+                    else:
+                        await message.reply_text("❍ ᴇʀʀᴏʀ: No response from API.")
+                except ValueError:
+                    await message.reply_text("❍ ᴇʀʀᴏʀ: Invalid response format.")
+    except Exception as e:
+        # Catch any other exceptions and send an error message
+        await message.reply_text(f"**❍ ᴇʀʀᴏʀ: {e} ")
