@@ -8,7 +8,7 @@ from os import getenv
 from SHUKLAMUSIC import app
 from SHUKLAMUSIC.core.call import SHUKLA
 from SHUKLAMUSIC.misc import db
-SHUKLAMUSIC.mongo.afkdb import PROCESS
+from SHUKLAMUSIC.mongo.afkdb import PROCESS
 from SHUKLAMUSIC.utils.database import get_assistant, get_authuser_names, get_cmode
 from SHUKLAMUSIC.utils.decorators import ActualAdminCB, AdminActual, language
 from SHUKLAMUSIC.utils.formatters import alpha_to_int, get_readable_time
