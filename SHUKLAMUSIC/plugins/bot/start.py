@@ -1,3 +1,5 @@
+#join tg :- @SHIVANSH474
+
 import asyncio
 import random
 import time
