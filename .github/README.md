@@ -40,7 +40,7 @@
 
 
 <p align="center">
-<a href="https://telegram.me/SHIVANSHDEVS"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗔𝗡𝗢𝗡𝗬𝗠𝗢𝗨𝗦%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/Oyy_Anonymous"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗔𝗡𝗢𝗡𝗬𝗠𝗢𝗨𝗦%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 <p align="center">
 <a href="https://telegram.me/Oyy_Anonymous"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗔𝗡𝗢𝗬𝗠𝗢𝗨𝗦%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
