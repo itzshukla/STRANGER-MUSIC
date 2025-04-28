@@ -1,9 +1,9 @@
 <h2 align="center">
-    ─「 𝐒ᴛʀᴀɴɢᴇʀ 𝘅 𝐌ᴜsɪᴄ 」─
+    ─「 sʜɪᴢᴜ 𝘅 ᴍᴜsɪᴄ 」─
 
 </h2>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=ㅤ+𝚆𝙴𝙻𝙲𝙾𝙼𝙴+𝚃𝙾+𝚂𝚃𝚁𝙰𝙽𝙶𝙴𝚁+𝙼𝚄𝚂𝙸𝙲+𝚁𝙴𝙿𝙾+;ㅤ+𝚃𝙷𝙸𝚂+𝙸𝚂+𝙰+𝙰𝙳𝚅𝙰𝙽𝙲𝙴+𝙼𝚄𝚂𝙸𝙲+𝙱𝙾𝚃;𝙿𝙾𝚆𝙴𝚁𝙴𝙳+𝙱𝚈+☞+𝗧𝗛𝗘+𝗧𝗘𝗔𝗠+𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥)](https://github.com/SHIVANSH475/SHIVANSH-MUSIC)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=ㅤ+𝚆𝙴𝙻𝙲𝙾𝙼𝙴+𝚃𝙾+𝚂𝚃𝚁𝙰𝙽𝙶𝙴𝚁+𝙼𝚄𝚂𝙸𝙲+𝚁𝙴𝙿𝙾+;ㅤ+𝚃𝙷𝙸𝚂+𝙸𝚂+𝙰+𝙰𝙳𝚅𝙰𝙽𝙲𝙴+𝙼𝚄𝚂𝙸𝙲+𝙱𝙾𝚃;𝙿𝙾𝚆𝙴𝚁𝙴𝙳+𝙱𝚈+☞+𝗧𝗛𝗘+𝗧𝗘𝗔𝗠+𝗔𝗡𝗢𝗡𝗬𝗠𝗢𝗨𝗦)](https://github.com/SHIVANSH475/SHIVANSH-MUSIC)
 
 
 
@@ -40,10 +40,10 @@
 
 
 <p align="center">
-<a href="https://telegram.me/SHIVANSHDEVS"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗦𝗛𝗜𝗩𝗔𝗡𝗦𝗛%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/SHIVANSHDEVS"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗔𝗡𝗢𝗡𝗬𝗠𝗢𝗨𝗦%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 <p align="center">
-<a href="https://telegram.me/ITSZ_SHIVANSH"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗦𝗛𝗨𝗞𝗟𝗔%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/Oyy_Anonymous"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝗔𝗡𝗢𝗬𝗠𝗢𝗨𝗦%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 <h3 align="center">
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʟᴏᴄᴀʟ ʜᴏsᴛ/ ᴠᴘs 」─
@@ -77,4 +77,4 @@ Press `Ctrl+C` when you're done with editing env and `:wq` to save the env<br>
 - For getting out from tmux session : Press `Ctrl+b` and then `d`<br>
 ━━━━━━━━━━━━━━━━━━━━
 ### Contact :
-<a href="https://t.me/SHIVANSH474"><img title="Telegram" src="https://img.shields.io/badge/Telegram-%23000000.svg?&style=for-the-badge&logo=telegram&logoColor=61DAFB"></a>
+<a href="https://t.me/Oyy_Anonymous"><img title="Telegram" src="https://img.shields.io/badge/Telegram-%23000000.svg?&style=for-the-badge&logo=telegram&logoColor=61DAFB"></a>
