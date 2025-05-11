@@ -3,7 +3,7 @@
 
 </h2>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=ㅤ+ᴡᴇʟᴄᴏᴍ+ᴛᴏ+ᴀɴᴏɴʏᴍᴏᴜs+ᴍᴜsɪᴄʙᴏᴛ+ʀᴇᴘᴏ+;ㅤ+ᴛʜɪs+ɪs+ᴀ+ᴀᴅᴠᴀɴᴄᴇᴅ+ᴍᴜsɪᴄ+ʙᴏᴛ;ᴘᴏᴡᴇʀᴅ+ʙʏ+☞+𝗧𝗛𝗘+𝗧𝗘𝗔𝗠+𝗔𝗡𝗢𝗡𝗬𝗠𝗢𝗨𝗦)](https://github.com/SHIVANSH475/SHIVANSH-MUSIC)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=ㅤ+ᴡᴇʟᴄᴏᴍ+ᴛᴏ+ᴀɴᴏɴʏᴍᴏᴜs+ᴍᴜsɪᴄʙᴏᴛ+ʀᴇᴘᴏ+;ㅤ+ᴛʜɪs+ɪs+ᴀ+ᴀᴅᴠᴀɴᴄᴇᴅ+ᴍᴜsɪᴄ+ʙᴏᴛ;ᴘᴏᴡᴇʀᴅ+ʙʏ+☞+.𝁘ໍ 𝝖𝗻𝝾𝗻𝝲𝗺𝗼𝞄𝘀 ⌯ 𝘅𝗗 𓆩🍷𓆪)](https://github.com/SHIVANSH475/SHIVANSH-MUSIC)
 
 
 
