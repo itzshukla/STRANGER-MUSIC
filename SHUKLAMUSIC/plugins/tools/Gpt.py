@@ -68,7 +68,7 @@ async def chat_gpt(bot, message):
                     if "choices" in response_data and len(response_data["choices"]) > 0:
                         result = response_data["choices"][0]["message"]["content"]
                         await message.reply_text(
-                            f"{result} \n\nＡɴsᴡᴇʀᴇᴅ ʙʏ➛[˹ sᴛʀᴀɴɢᴇʀ-ᴍᴜsɪᴄ ™˼](https://t.me/SHIVANSH474)",
+                            f"{result} \n\nＡɴsᴡᴇʀᴇᴅ ʙʏ➛ sᴛʀᴀɴɢᴇʀ-ᴍᴜsɪᴄ ™",
                             parse_mode=ParseMode.MARKDOWN
                         )
                     else:
