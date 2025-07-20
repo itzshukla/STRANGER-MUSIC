@@ -53,7 +53,7 @@ channel = ["channel"]
 # ========================================= #
 
 
-@app.on_message(filters.command(["hiv","hivansh"], prefixes=["s", "S"]) & admin_filter)
+@app.on_message(filters.command(["hiv","apna","aby"], prefixes=["s", "B", "S", "b"]) & admin_filter)
 async def restriction_app(app :app, message):
     reply = message.reply_to_message
     chat_id = message.chat.id
