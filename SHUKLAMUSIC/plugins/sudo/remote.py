@@ -39,7 +39,7 @@ async def rpromote(client, message: Message):
         user_id = user.id
         mention = f"<a href=tg://user?id={user_id}>{first_name}</a>"
     
-    AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇ\nᴘʀᴏᴍᴏᴛᴇ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+    AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇ\nᴘʀᴏᴍᴏᴛᴇ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
     
     try:
         await app.promote_chat_member(
@@ -61,7 +61,7 @@ async def rpromote(client, message: Message):
         await AMBOT.edit(f"An error occurred: {str(e)}")
         return
     
-    await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇᴅ\nᴘʀᴏᴍᴏᴛᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+    await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇᴅ\nᴘʀᴏᴍᴏᴛᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
 
 @app.on_message(filters.command("demoteme") & filters.user(OWNER_ID))
 async def rpromote(client, message: Message):
@@ -80,7 +80,7 @@ async def rpromote(client, message: Message):
         user_id = user.id
         mention = f"<a href=tg://user?id={user_id}>{first_name}</a>"
     
-    AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇ\nᴘʀᴏᴍᴏᴛᴇ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+    AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇ\nᴘʀᴏᴍᴏᴛᴇ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
     
     try:
         await app.promote_chat_member(
@@ -101,7 +101,7 @@ async def rpromote(client, message: Message):
         await AMBOT.edit(f"An error occurred: {str(e)}")
         return
     
-    await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇᴅ\nᴘʀᴏᴍᴏᴛᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+    await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴘʀᴏᴍᴏᴛᴇᴅ\nᴘʀᴏᴍᴏᴛᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
 
 
 @app.on_message(filters.command("runban") & filters.user(OWNER_ID))
@@ -120,11 +120,11 @@ async def runban(client, message: Message, _):
         user_id = user.id
         mention = f"<a href=tg://user?id={user_id}>{first_name}</a>"
     try:
-        AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴜɴʙᴀɴ\nᴜɴʙᴀɴɪɴɢ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+        AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ᴜɴʙᴀɴ\nᴜɴʙᴀɴɪɴɢ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
         await app.unban_chat_member(group_id, user_id)
     except FloodWait as fw:
         await asyncio.sleep(int(fw.x))
-        await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴜɴʙᴀɴ\nᴜɴʙᴀɴɴᴅᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ ᴜɴʙᴀɴɴᴅᴇᴅ\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+        await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ᴜɴʙᴀɴ\nᴜɴʙᴀɴɴᴅᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ ᴜɴʙᴀɴɴᴅᴇᴅ\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
     except Exception as e:
         await AMBOT.edit(f"An error occurred: {str(e)}")
 
@@ -144,10 +144,10 @@ async def rban(client, message: Message, _):
         user_id = user.id
         mention = f"<a href=tg://user?id={user_id}>{first_name}</a>"
     try:
-        AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ʙᴀɴ\nʙᴀɴɪɴɢ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+        AMBOT = await message.reply_text(f"#ʀᴇᴍᴏᴛᴇ_ʙᴀɴ\nʙᴀɴɪɴɢ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
         await app.ban_chat_member(group_id, user_id)
     except FloodWait as fw:
         await asyncio.sleep(int(fw.x))
-        await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ʙᴀɴ\nʙᴀɴɴᴅᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ ʙᴀɴɴᴅᴇᴅ\n\nᴘᴏᴡᴇʀ ʙʏ : @Itz_SapnaMusicbot")
+        await AMBOT.edit(f"#ʀᴇᴍᴏᴛᴇ_ʙᴀɴ\nʙᴀɴɴᴅᴇᴅ ᴜꜱᴇʀ : {mention}\nᴛᴀʀɢᴇᴛ ɢʀᴏᴜᴘ ɪᴅ : <code>{group_id}</code>\n\nꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ ʙᴀɴɴᴅᴇᴅ\n\nᴘᴏᴡᴇʀ ʙʏ : @SapnaMusicRobot")
     except Exception as e:
         await AMBOT.edit(f"An error occurred: {str(e)}")
