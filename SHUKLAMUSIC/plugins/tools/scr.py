@@ -73,7 +73,7 @@ async def cmd_scr(client, message):
             if not cards:
                 continue
             
-            file_name = f"{limit}x_CC_Scraped_By_@Itz_SapnaMusicbot"
+            file_name = f"{limit}x_CC_Scraped_By_@SapnaMusicRobot"
             for item in cards:
                 amt_cc += 1
                 cc, mes, ano, cvv = item
