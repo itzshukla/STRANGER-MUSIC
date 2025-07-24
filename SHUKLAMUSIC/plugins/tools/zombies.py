@@ -67,60 +67,71 @@ async def remove_deleted_accounts(client, message: Message):
 
 # ------------------- ADMINS LIST -------------------
 
-@app.on_message(filters.command(["admins", "staff"]))
-async def list_admins(client, message: Message):
+@app.on_message(filters.command(["admins","staff"]))
+async def admins(client, message):
+  try: 
+    adminList = []
+    ownerList = []
+    async for admin in app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
+      if admin.privileges.is_anonymous == False:
+        if admin.user.is_bot == True:
+          pass
+        elif admin.status == ChatMemberStatus.OWNER:
+          ownerList.append(admin.user)
+        else:  
+          adminList.append(admin.user)
+      else:
+        pass   
+    lenAdminList= len(ownerList) + len(adminList)  
+    text2 = f"**ɢʀᴏᴜᴘ sᴛᴀғғ - {message.chat.title}**\n\n"
     try:
-        admins = []
-        owners = []
-
-        async for member in app.get_chat_members(message.chat.id, filter=ChatMembersFilter.ADMINISTRATORS):
-            if not member.privileges.is_anonymous and not member.user.is_bot:
-                if member.status == ChatMemberStatus.OWNER:
-                    owners.append(member.user)
-                else:
-                    admins.append(member.user)
-
-        text = f"**👥 Group Staff - {message.chat.title}**\n\n"
-
-        if owners:
-            owner = owners[0]
-            text += f"👑 Owner\n└ {owner.mention if not owner.username else '@' + owner.username}\n\n"
+      owner = ownerList[0]
+      if owner.username == None:
+        text2 += f"👑 ᴏᴡɴᴇʀ\n└ {owner.mention}\n\n👮🏻 ᴀᴅᴍɪɴs\n"
+      else:
+        text2 += f"👑 ᴏᴡɴᴇʀ\n└ @{owner.username}\n\n👮🏻 ᴀᴅᴍɪɴs\n"
+    except:
+      text2 += f"👑 ᴏᴡɴᴇʀ\n└ <i>Hidden</i>\n\n👮🏻 ᴀᴅᴍɪɴs\n"
+    if len(adminList) == 0:
+      text2 += "└ <i>ᴀᴅᴍɪɴs ᴀʀᴇ ʜɪᴅᴅᴇɴ</i>"  
+      await app.send_message(message.chat.id, text2)   
+    else:  
+      while len(adminList) > 1:
+        admin = adminList.pop(0)
+        if admin.username == None:
+          text2 += f"├ {admin.mention}\n"
         else:
-            text += "👑 Owner\n└ <i>Hidden</i>\n\n"
-
-        text += "👮🏻 Admins\n"
-        if not admins:
-            text += "└ <i>Admins are hidden</i>"
+          text2 += f"├ @{admin.username}\n"    
+      else:    
+        admin = adminList.pop(0)
+        if admin.username == None:
+          text2 += f"└ {admin.mention}\n\n"
         else:
-            for i, admin in enumerate(admins):
-                if admin.username:
-                    text += f"{'└' if i == len(admins) - 1 else '├'} @{admin.username}\n"
-                else:
-                    text += f"{'└' if i == len(admins) - 1 else '├'} {admin.mention}\n"
+          text2 += f"└ @{admin.username}\n\n"
+      text2 += f"✅ | **ᴛᴏᴛᴀʟ ɴᴜᴍʙᴇʀ ᴏғ ᴀᴅᴍɪɴs**: {lenAdminList}"  
+      await app.send_message(message.chat.id, text2)           
+  except FloodWait as e:
+    await asyncio.sleep(e.value)       
 
-        text += f"\n✅ | Total Admins: {len(admins) + len(owners)}"
-        await app.send_message(message.chat.id, text)
-
-    except FloodWait as e:
-        await asyncio.sleep(e.value)
-
-
-# ------------------- BOTS LIST -------------------
+# ------------------------------------------------------------------------------- #
 
 @app.on_message(filters.command("bots"))
-async def list_bots(client, message: Message):
-    try:
-        bots = [member.user async for member in app.get_chat_members(message.chat.id, filter=ChatMembersFilter.BOTS)]
+async def bots(client, message):  
+  try:    
+    botList = []
+    async for bot in app.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.BOTS):
+      botList.append(bot.user)
+    lenBotList = len(botList) 
+    text3  = f"**ʙᴏᴛ ʟɪsᴛ - {message.chat.title}**\n\n🤖 ʙᴏᴛs\n"
+    while len(botList) > 1:
+      bot = botList.pop(0)
+      text3 += f"├ @{bot.username}\n"    
+    else:    
+      bot = botList.pop(0)
+      text3 += f"└ @{bot.username}\n\n"
+      text3 += f"✅ | *ᴛᴏᴛᴀʟ ɴᴜᴍʙᴇʀ ᴏғ ʙᴏᴛs**: {lenBotList}"  
+      await app.send_message(message.chat.id, text3)
+  except FloodWait as e:
+    await asyncio.sleep(e.value)
 
-        if not bots:
-            return await message.reply("🤖 | No bots found in this group.")
-
-        text = f"**🤖 Bots List - {message.chat.title}**\n\n"
-        for i, bot in enumerate(bots):
-            text += f"{'└' if i == len(bots) - 1 else '├'} @{bot.username}\n"
-
-        text += f"\n✅ | Total Bots: {len(bots)}"
-        await app.send_message(message.chat.id, text)
-
-    except FloodWait as e:
-        await asyncio.sleep(e.value)
+# ------------------------------------------------------------------------------- #
