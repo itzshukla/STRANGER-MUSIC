@@ -1,4 +1,4 @@
-import random 
+import random
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from SHUKLAMUSIC.plugins.tools.pretenderdb import impo_off, impo_on, check_pretender, add_userdata, get_userdata, usr_data
@@ -12,7 +12,7 @@ MISHI = [
     "https://graph.org/file/84e84ff778b045879d24f.jpg",
     "https://graph.org/file/a4a8f0e5c0e6b18249ffc.jpg",
     "https://graph.org/file/ed92cada78099c9c3a4f7.jpg",
-    "https://graph.org/file/d6360613d0fa7a9d2f90b.jpg"
+    "https://graph.org/file/d6360613d0fa7a9d2f90b.jpg",
     "https://graph.org/file/37248e7bdff70c662a702.jpg",
     "https://graph.org/file/0bfe29d15e918917d1305.jpg",
     "https://graph.org/file/16b1a2828cc507f8048bd.jpg",
@@ -25,21 +25,25 @@ MISHI = [
     "https://graph.org/file/3514efaabe774e4f181f2.jpg",
 ]
 
-
 ROY = [
     [
         InlineKeyboardButton(
             text="ᴀᴅᴅ ᴍᴇ",
-            url=f"https://t.me/SapnaMusicRobot?startgroup=true"),
-        InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇ", url=f"https://t.me/SHIVANSH474")
+            url="https://t.me/SapnaMusicRobot?startgroup=true"
+        ),
+        InlineKeyboardButton(
+            text="ᴜᴘᴅᴀᴛᴇ",
+            url="https://t.me/SHIVANSH474"
+        )
     ],
 ]
 
 
 @app.on_message(filters.group & ~filters.bot & ~filters.via_bot, group=69)
 async def chk_usr(_, message: Message):
-    if message.sender_chat or not await check_pretender(message.chat.id):
+    if not message.from_user or message.sender_chat or not await check_pretender(message.chat.id):
         return
+
     if not await usr_data(message.from_user.id):
         return await add_userdata(
             message.from_user.id,
@@ -47,93 +51,82 @@ async def chk_usr(_, message: Message):
             message.from_user.first_name,
             message.from_user.last_name,
         )
-    usernamebefore, first_name, lastname_before = await get_userdata(message.from_user.id)
+
+    username_before, first_name_before, last_name_before = await get_userdata(message.from_user.id)
     msg = ""
+    needs_update = False
+
     if (
-        usernamebefore != message.from_user.username
-        or first_name != message.from_user.first_name
-        or lastname_before != message.from_user.last_name
+        username_before != message.from_user.username
+        or first_name_before != message.from_user.first_name
+        or last_name_before != message.from_user.last_name
     ):
-        msg += f"""
-**♥︎ ᴜsᴇʀ sʜᴏʀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ♥︎**
+        msg += f"""**♥︎ ᴜsᴇʀ sʜᴏʀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ♥︎**
 
 **๏ ɴᴀᴍᴇ** ➛ {message.from_user.mention}
 **๏ ᴜsᴇʀ ɪᴅ** ➛ {message.from_user.id}
 """
-    if usernamebefore != message.from_user.username:
-        usernamebefore = f"@{usernamebefore}" if usernamebefore else "NO USERNAME"
-        usernameafter = (
-            f"@{message.from_user.username}"
-            if message.from_user.username
-            else "NO USERNAME"
-        )
-        msg += """
+
+    if username_before != message.from_user.username:
+        bef = f"@{username_before}" if username_before else "NO USERNAME"
+        aft = f"@{message.from_user.username}" if message.from_user.username else "NO USERNAME"
+        msg += f"""
 **♥︎ ᴄʜᴀɴɢᴇᴅ ᴜsᴇʀɴᴀᴍᴇ ♥︎**
 
 **๏ ʙᴇғᴏʀᴇ** ➛ {bef}
 **๏ ᴀғᴛᴇʀ** ➛ {aft}
-""".format(bef=usernamebefore, aft=usernameafter)
-        await add_userdata(
-            message.from_user.id,
-            message.from_user.username,
-            message.from_user.first_name,
-            message.from_user.last_name,
-        )
-    if first_name != message.from_user.first_name:
-        msg += """
-**♥︎ ᴄʜᴀɴɢᴇs ғɪʀsᴛ ɴᴀᴍᴇ ♥︎**
+"""
+        needs_update = True
+
+    if first_name_before != message.from_user.first_name:
+        msg += f"""
+**♥︎ ᴄʜᴀɴɢᴇᴅ ғɪʀsᴛ ɴᴀᴍᴇ ♥︎**
+
+**๏ ʙᴇғᴏʀᴇ** ➛ {first_name_before}
+**๏ ᴀғᴛᴇʀ** ➛ {message.from_user.first_name}
+"""
+        needs_update = True
+
+    if last_name_before != message.from_user.last_name:
+        bef = last_name_before or "NO LAST NAME"
+        aft = message.from_user.last_name or "NO LAST NAME"
+        msg += f"""
+**♥︎ ᴄʜᴀɴɢᴇᴅ ʟᴀsᴛ ɴᴀᴍᴇ ♥︎**
 
 **๏ ʙᴇғᴏʀᴇ** ➛ {bef}
 **๏ ᴀғᴛᴇʀ** ➛ {aft}
-""".format(
-            bef=first_name, aft=message.from_user.first_name
-        )
-        await add_userdata(
-            message.from_user.id,
-            message.from_user.username,
-            message.from_user.first_name,
-            message.from_user.last_name,
-        )
-    if lastname_before != message.from_user.last_name:
-        lastname_before = lastname_before or "NO LAST NAME"
-        lastname_after = message.from_user.last_name or "NO LAST NAME"
-        msg += """
-**♥︎ ᴄʜᴀɴɢᴇs ʟᴀsᴛ ɴᴀᴍᴇ ♥︎**
+"""
+        needs_update = True
 
-**๏ ʙᴇғᴏʀᴇ** ➛ {bef}
-**๏ ᴀғᴛᴇʀ** ➛ {aft}
-""".format(
-            bef=lastname_before, aft=lastname_after
-        )
+    if needs_update:
         await add_userdata(
             message.from_user.id,
             message.from_user.username,
             message.from_user.first_name,
             message.from_user.last_name,
         )
-    if msg != "":
-        await message.reply_photo(random.choice(MISHI), caption=msg, reply_markup=InlineKeyboardMarkup(ROY),)
+        await message.reply_photo(
+            random.choice(MISHI),
+            caption=msg,
+            reply_markup=InlineKeyboardMarkup(ROY),
+        )
 
 
 @app.on_message(filters.group & filters.command("imposter") & ~filters.bot & ~filters.via_bot)
 async def set_mataa(_, message: Message):
     if len(message.command) == 1:
-        return await message.reply("**ᴅᴇᴛᴇᴄᴛ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴇʀs ᴜsᴀɢᴇ : ᴘʀᴇᴛᴇɴᴅᴇʀ ᴏɴ|ᴏғғ**")
-    if message.command[1] == "enable":
-        cekset = await impo_on(message.chat.id)
-        if cekset:
-            await message.reply("**ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ɪs ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ.**")
+        return await message.reply("**ᴅᴇᴛᴇᴄᴛ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴇʀs ᴜsᴀɢᴇ : /imposter enable|disable**")
+
+    cmd = message.command[1].lower()
+    if cmd == "enable":
+        if await impo_on(message.chat.id):
+            await message.reply(f"**ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ɪs ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ.**")
         else:
-            await impo_on(message.chat.id)
             await message.reply(f"**sᴜᴄᴄᴇssғᴜʟʟʏ ᴇɴᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ғᴏʀ** {message.chat.title}")
-    elif message.command[1] == "disable":
-        cekset = await impo_off(message.chat.id)
-        if not cekset:
-            await message.reply("**ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ɪs ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ.**")
+    elif cmd == "disable":
+        if not await impo_off(message.chat.id):
+            await message.reply(f"**ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ɪs ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ.**")
         else:
-            await impo_off(message.chat.id)
             await message.reply(f"**sᴜᴄᴄᴇssғᴜʟʟʏ ᴅɪsᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴍᴏᴅᴇ ғᴏʀ** {message.chat.title}")
     else:
-        await message.reply("**ᴅᴇᴛᴇᴄᴛ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴇʀs ᴜsᴀɢᴇ : ᴘʀᴇᴛᴇɴᴅᴇʀ ᴏɴ|ᴏғғ**")
-
-    
+        await message.reply("**ᴅᴇᴛᴇᴄᴛ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴇʀs ᴜsᴀɢᴇ : /imposter enable|disable**")
