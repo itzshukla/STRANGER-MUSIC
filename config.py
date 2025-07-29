@@ -28,6 +28,7 @@ OWNER_ID = int(getenv("OWNER_ID", 6762113050))
 # Heroku
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
+DEEP_API = getenv("DEEP_API")
 
 # Git
 UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/itzshukla/STRANGER-MUSIC")
