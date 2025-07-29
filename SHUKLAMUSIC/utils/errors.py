@@ -55,3 +55,39 @@ def capture_err(func):
             raise err
 
     return capture
+
+def capture_callback_err(func):
+    """
+    Handles errors in callback query handlers.
+    Logs only unignored errors.
+    """
+    @wraps(func)
+    async def wrapper(client, callback_query, *args, **kwargs):
+        try:
+            return await func(client, callback_query, *args, **kwargs)
+        except Exception as err:
+            tb = "".join(traceback.format_exception(*sys.exc_info()))
+            extras = {
+                "User": callback_query.from_user.mention if callback_query.from_user else "N/A",
+                "Chat ID": callback_query.message.chat.id
+            }
+            filename = f"cb_error_log_{callback_query.message.chat.id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            await handle_trace(err, tb, "Callback Error", filename, extras)
+            raise err
+    return wrapper
+
+def capture_internal_err(func):
+    """
+    Handles errors in background/internal async bot functions.
+    """
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        try:
+            return await func(*args, **kwargs)
+        except Exception as err:
+            tb = "".join(traceback.format_exception(*sys.exc_info()))
+            extras = {"Function": func.__name__}
+            filename = f"internal_error_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            await handle_trace(err, tb, "Internal Error", filename, extras)
+            raise err
+    return wrapper
