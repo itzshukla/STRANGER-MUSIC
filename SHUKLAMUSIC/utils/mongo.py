@@ -20,6 +20,7 @@ db = mongo.SHUKLAMUSIC
 
 coupledb = db.couple
 
+impdb = db.pretender
 
 afkdb = db.afk
 
