@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.types import Message
 from SHUKLAMUSIC import app
-from SHUKLAMUSIC.mongo.pretenderdb import (
+from SHUKLAMUSIC.plugins.tools.pretenderdb import (
     impo_off, impo_on, check_pretender,
     add_userdata, get_userdata, usr_data
 )
