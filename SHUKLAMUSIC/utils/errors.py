@@ -10,7 +10,7 @@ from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from SHUKLAMUSIC import app
 from config import LOGGER_ID, DEBUG_IGNORE_LOG
 from SHUKLAMUSIC.utils.exceptions import is_ignored_error
-from SHUKLAMUSIC.utils.pastebin import SHUKLABIN
+from SHUKLAMUSIC.utils.pastebin import SHUKLABin
 
 
 DEBUG_LOG_FILE = "ignored_errors.log"
