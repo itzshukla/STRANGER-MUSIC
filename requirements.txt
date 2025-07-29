@@ -32,6 +32,7 @@ python-whois
 pyyaml
 qrcode
 requests
+SafoneAPI
 speedtest-cli
 SpeechRecognition
 spotipy
@@ -39,4 +40,7 @@ telegraph
 tgcrypto
 unidecode
 wget
+youtube-search
+youtube-search-python
+youtube_dl==2021.12.17
 yt-dlp==2025.7.21
