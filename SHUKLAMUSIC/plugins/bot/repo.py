@@ -49,7 +49,7 @@ async def repo_handler(_, msg):
     ]
 
     await msg.reply_photo(
-        photo="https://telegra.ph/file/d9bddd89a8070632de73e.jpg",
+        photo="https://files.catbox.moe/jxribw.jpg",
         caption=start_txt,
         reply_markup=InlineKeyboardMarkup(buttons)
     )
