@@ -1,4 +1,4 @@
-from pyrogram.types import CallbackQuery
+from pyrogram.types import CallbackQuery, Message
 from pyrogram.enums import ChatType, ChatMemberStatus
 
 async def is_admin(message_or_cq) -> bool:
