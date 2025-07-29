@@ -1,5 +1,7 @@
+import httpx
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from SHUKLAMUSIC.utils.errors import capture_err 
 from SHUKLAMUSIC import app
 from config import BOT_USERNAME
 
