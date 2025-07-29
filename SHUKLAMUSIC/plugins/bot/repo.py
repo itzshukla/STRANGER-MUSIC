@@ -2,76 +2,56 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from SHUKLAMUSIC import app
 from config import BOT_USERNAME
-from SHUKLAMUSIC.utils.errors import capture_err
-import httpx 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-start_txt = """**
-❁ ᴡᴇʟᴄᴏᴍᴇ ғᴏʀ sᴛʀᴀɴɢᴇʀ ʀᴇᴘᴏs ✪
- 
- ➲ ᴀʟʟ ʀᴇᴘᴏ ᴇᴀsɪʟʏ ᴅᴇᴘʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ ᴡɪᴛʜᴏᴜᴛ ᴀɴʏ ᴇʀʀᴏʀ ✰
- 
- ➲ ɴᴏ ʜᴇʀᴏᴋᴜ ʙᴀɴ ɪssᴜᴇ ✰
- 
- ➲ ɴᴏ ɪᴅ ʙᴀɴ ɪssᴜᴇ ✰
- 
- ➲ ᴜɴʟɪᴍɪᴛᴇᴅ ᴅʏɴᴏs ✰
- 
- ➲ ʀᴜɴ 24x7 ʟᴀɢ ғʀᴇᴇ ᴡɪᴛʜᴏᴜᴛ sᴛᴏᴘ ✰
- 
- ► ɪғ ʏᴏᴜ ғᴀᴄᴇ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ ᴛʜᴇɴ sᴇɴᴅ ss
-**"""
+# Caption Text
+start_txt = """<b>✨ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ <u>sᴛʀᴀɴɢᴇʀ ʀᴇᴘᴏs</u> ✨</b>
 
+🚀 <b>ᴇᴀsʏ ᴅᴇᴘʟᴏʏ</b> – 1-ᴄʟɪᴄᴋ ʜᴇʀᴏᴋᴜ ᴅᴇᴘʟᴏʏᴍᴇɴᴛ  
+🛡️ <b>ɴᴏ ʜᴇʀᴏᴋᴜ ᴏʀ ɪᴅ ʙᴀɴ ɪssᴜᴇs</b>  
+🔋 <b>ᴜɴʟɪᴍɪᴛᴇᴅ ᴅʏɴᴏs</b> – ʀᴜɴ 24/7 ʟᴀɢɢ-ғʀᴇᴇ  
+⚙️ <b>ғᴜʟʟʏ ғᴜɴᴄᴛɪᴏɴᴀʟ & ᴇʀʀᴏʀ-ғʀᴇᴇ</b>  
 
+<i>ɴᴇᴇᴅ ʜᴇʟᴘ? sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴛᴏ ᴛʜᴇ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ!</i>"""
 
-
+# Repo Command Handler
 @app.on_message(filters.command("repo"))
-async def start(_, msg):
+async def repo_handler(_, msg):
     buttons = [
-        [ 
-          InlineKeyboardButton("ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+        [InlineKeyboardButton("➕ ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
+        [
+            InlineKeyboardButton("💬 sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
+            InlineKeyboardButton("👤 ᴏᴡɴᴇʀ", url="https://t.me/SHASHANKDEVS"),
+        ],
+        [InlineKeyboardButton("🧾 ᴜᴘᴅᴀᴛᴇs", url="https://t.me/SHIVANSH474")],
+        [
+            InlineKeyboardButton("💥 ʙᴀɴᴀʟʟ", url="https://github.com/itzshukla/STRANGER-BANALL/fork"),
+            InlineKeyboardButton("🎧 ᴍᴜsɪᴄ V2", url="https://github.com/itzshukla/STRANGER-MUSIC/fork"),
         ],
         [
-          InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
-          InlineKeyboardButton("ᴏᴡɴᴇʀ", url="https://t.me/SHASHANKDEVS"),
-          ],
-               [
-                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url="https://t.me/SHIVANSH474"),
+            InlineKeyboardButton("🎶 ᴍᴜsɪᴄ V1", url="https://github.com/itzshukla/STRANGER-MUSIC2.0/fork"),
+            InlineKeyboardButton("💬 ᴄʜᴀᴛʙᴏᴛ", url="https://github.com/itzshukla/STRANGER-CHATBOT/fork"),
+        ],
+        [
+            InlineKeyboardButton("🎯 sᴛʀɪɴɢ ɢᴇɴ", url="https://github.com/itzshukla/STRANGER-STRING-GEN/fork"),
+            InlineKeyboardButton("🛠️ ɢᴄ ᴍᴀɴᴀɢᴇʀ", url="https://github.com/itzshukla/STRANGER-ROBOT/fork"),
+        ],
+        [
+            InlineKeyboardButton("⚔️ sᴘᴀᴍ ʙᴏᴛs", url="https://github.com/itzshukla/STRANGER-SPAM-X/fork"),
+            InlineKeyboardButton("👾 ʙᴀɴᴀʟʟ 10", url="https://github.com/itzshukla/STRANGER-BANALL-BOTS/fork"),
+        ],
+        [
+            InlineKeyboardButton("🧪 sᴛʀɪɴɢ ʜᴀᴄᴋ", url="https://github.com/itzshukla/STRANGER-SESSION-HACK/fork"),
+            InlineKeyboardButton("🤖 ɪᴅ ᴜsᴇʀʙᴏᴛ", url="https://t.me/StrangerHosterbot"),
+        ],
+        [InlineKeyboardButton("👑 sᴜᴘᴇʀ ᴜsᴇʀʙᴏᴛ", url="https://github.com/itzshukla/STRANGER-HELLBOT/fork")]
+    ]
 
-],
-[
-              InlineKeyboardButton("ʙᴀɴ-ᴀʟʟ", url=f"https://github.com/itzshukla/STRANGER-BANALL/fork"),
-              InlineKeyboardButton("︎V2-ᴍᴜsɪᴄ", url=f"https://github.com/itzshukla/STRANGER-MUSIC/fork"),
-              ],
-              [
-              InlineKeyboardButton("V1 ᴍᴜsɪᴄ", url=f"https://github.com/itzshukla/STRANGER-MUSIC2.0/fork"),
-InlineKeyboardButton("ᴄʜᴀᴛ-ʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-CHATBOT/fork"),
-],
-[
-InlineKeyboardButton("sᴛʀɪɴɢ-ɢᴇɴ", url=f"https://github.com/itzshukla/STRANGER-STRING-GEN/fork"),
-InlineKeyboardButton("ɢᴄ-ᴍᴀɴᴀɢᴇᴍᴇɴᴛ", url=f"https://github.com/itzshukla/STRANGER-ROBOT/fork"),
-],
-[
-              InlineKeyboardButton("sᴘᴀᴍ-ʙᴏᴛs", url=f"https://github.com/itzshukla/STRANGER-SPAM-X/fork"),
-              InlineKeyboardButton("ʙᴀɴᴀʟʟ 10 ʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-BANALL-BOTS/fork"),
-              ],
-              [
-              InlineKeyboardButton("sᴛʀɪɴɢ ʜᴀᴄᴋ", url=f"https://github.com/itzshukla/STRANGER-SESSION-HACK/fork"),
-InlineKeyboardButton("ɪᴅ-ᴜsᴇʀʙᴏᴛ", url=f"https://t.me/StrangerHosterbot"),
-],
-[
-InlineKeyboardButton("sᴜᴘᴇʀ-ᴜsᴇʀʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-HELLBOT/fork"),
-
-        ]]
-    
-    reply_markup = InlineKeyboardMarkup(buttons)
-    
     await msg.reply_photo(
         photo="https://telegra.ph/file/d9bddd89a8070632de73e.jpg",
         caption=start_txt,
-        reply_markup=reply_markup
+        reply_markup=InlineKeyboardMarkup(buttons)
     )
- 
+
    
 # --------------
 
