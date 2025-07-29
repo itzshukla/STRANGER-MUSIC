@@ -1,68 +1,59 @@
-import asyncio, os, time, aiohttp
 import aiohttp
 from pyrogram import filters
-from daxxhub import daxxhub as papadaxx
-from SHUKLAMUSIC import app
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
-###
-@app.on_message(filters.command("daxxhub"))
-async def daxxhub(_, message):
-    text = message.text[len("/daxxhub") :]
-    papadaxx(f"{text}").save(f"daxxhub_{message.from_user.id}.png")
-    await message.reply_photo(f"daxxhub_{message.from_user.id}.png")
-    os.remove(f"daxxhub_{message.from_user.id}.png")
-####
+from SHUKLAMUSIC import app
+
 
 @app.on_message(filters.command(["github", "git"]))
-async def github(_, message):
+async def github(_, message: Message):
     if len(message.command) != 2:
-        await message.reply_text("/git itzshukla")
-        return
+        return await message.reply_text("**ᴜsᴀɢᴇ:** `/git <username>`")
 
     username = message.text.split(None, 1)[1]
-    URL = f'https://api.github.com/users/{username}'
+    url = f"https://api.github.com/users/{username}"
 
     async with aiohttp.ClientSession() as session:
-        async with session.get(URL) as request:
-            if request.status == 404:
-                return await message.reply_text("404")
+        async with session.get(url) as response:
+            if response.status == 404:
+                return await message.reply_text("🚫 **ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ!**")
+            elif response.status != 200:
+                return await message.reply_text("⚠️ **ᴇʀʀᴏʀ ғᴇᴛᴄʜɪɴɢ ᴅᴀᴛᴀ!**")
 
-            result = await request.json()
+            data = await response.json()
 
-            try:
-                url = result['html_url']
-                name = result['name']
-                company = result['company']
-                bio = result['bio']
-                created_at = result['created_at']
-                avatar_url = result['avatar_url']
-                blog = result['blog']
-                location = result['location']
-                repositories = result['public_repos']
-                followers = result['followers']
-                following = result['following']
+    name = data.get("name", "Not specified")
+    bio = data.get("bio", "No bio available.")
+    blog = data.get("blog", "N/A")
+    location = data.get("location", "Unknown")
+    company = data.get("company", "N/A")
+    created = data.get("created_at", "N/A")
+    url = data.get("html_url", "N/A")
+    repos = data.get("public_repos", "0")
+    followers = data.get("followers", "0")
+    following = data.get("following", "0")
+    avatar = data.get("avatar_url", None)
 
-                caption = f"""ɢɪᴛʜᴜʙ ɪɴғᴏ ᴏғ {name}
-                
-ᴜsᴇʀɴᴀᴍᴇ: {username}
-ʙɪᴏ: {bio}
-ʟɪɴᴋ: [Here]({url})
-ᴄᴏᴍᴩᴀɴʏ: {company}
-ᴄʀᴇᴀᴛᴇᴅ ᴏɴ: {created_at}
-ʀᴇᴩᴏsɪᴛᴏʀɪᴇs: {repositories}
-ʙʟᴏɢ: {blog}
-ʟᴏᴄᴀᴛɪᴏɴ: {location}
-ғᴏʟʟᴏᴡᴇʀs: {followers}
-ғᴏʟʟᴏᴡɪɴɢ: {following}"""
+    caption = f"""
+✨ **ɢɪᴛʜᴜʙ ᴘʀᴏғɪʟᴇ ɪɴꜰᴏ**
 
-            except Exception as e:
-                print(str(e))
-                pass
+👤 **ɴᴀᴍᴇ:** `{name}`
+🔧 **ᴜsᴇʀɴᴀᴍᴇ:** `{username}`
+📌 **ʙɪᴏ:** {bio}
+🏢 **ᴄᴏᴍᴘᴀɴʏ:** {company}
+📍 **ʟᴏᴄᴀᴛɪᴏɴ:** {location}
+🌐 **ʙʟᴏɢ:** {blog}
+🗓 **ᴄʀᴇᴀᴛᴇᴅ ᴏɴ:** `{created}`
+📁 **ᴘᴜʙʟɪᴄ ʀᴇᴘᴏs:** `{repos}`
+👥 **ғᴏʟʟᴏᴡᴇʀs:** `{followers}` | **ғᴏʟʟᴏᴡɪɴɢ:** `{following}`
+🔗 **ᴘʀᴏғɪʟᴇ:** [ᴠɪᴇᴡ ᴏɴ ɢɪᴛʜᴜʙ]({url})
+""".strip()
 
-    # Create an inline keyboard with a close button
-    close_button = InlineKeyboardButton("Close", callback_data="close")
-    inline_keyboard = InlineKeyboardMarkup([[close_button]])
+    keyboard = InlineKeyboardMarkup(
+        [[InlineKeyboardButton("❌ ᴄʟᴏsᴇ", callback_data="close")]]
+    )
 
-    # Send the message with the inline keyboard
-    await message.reply_photo(photo=avatar_url, caption=caption, reply_markup=inline_keyboard)
+    if avatar:
+        await message.reply_photo(photo=avatar, caption=caption, reply_markup=keyboard)
+    else:
+        await message.reply_text(caption, reply_markup=keyboard)
