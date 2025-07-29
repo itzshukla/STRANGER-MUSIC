@@ -18,6 +18,7 @@ from pytgcalls import PyTgCalls, StreamType
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
 from pytgcalls.exceptions import (NoActiveGroupCall, TelegramServerError, AlreadyJoinedError)
 from SHUKLAMUSIC.utils.admin_filters import admin_filter
+from config import BANNED_USERS
 
 @app.on_message(filters.command(["vcinfo"], ["/", "!"]))
 async def strcall(client, message):
