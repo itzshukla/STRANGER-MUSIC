@@ -1,9 +1,7 @@
 from SHUKLAMUSIC import app
 from pyrogram import Client, filters
-
 from pyrogram.enums import ParseMode
 
-####
 
 @app.on_message(filters.command('id'))
 async def getid(client, message):
