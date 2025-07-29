@@ -7,7 +7,7 @@ import httpx
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 start_txt = """**
-✪ ωεℓ¢σмє ƒσя 𝚂𝚝𝚛𝚊𝚗𝚐𝚎𝚛 яєρσѕ ✪
+❁ ᴡᴇʟᴄᴏᴍᴇ ғᴏʀ sᴛʀᴀɴɢᴇʀ ʀᴇᴘᴏs ✪
  
  ➲ ᴀʟʟ ʀᴇᴘᴏ ᴇᴀsɪʟʏ ᴅᴇᴘʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ ᴡɪᴛʜᴏᴜᴛ ᴀɴʏ ᴇʀʀᴏʀ ✰
  
@@ -15,7 +15,7 @@ start_txt = """**
  
  ➲ ɴᴏ ɪᴅ ʙᴀɴ ɪssᴜᴇ ✰
  
- ➲ᴜɴʟɪᴍɪᴛᴇᴅ ᴅʏɴᴏs ✰
+ ➲ ᴜɴʟɪᴍɪᴛᴇᴅ ᴅʏɴᴏs ✰
  
  ➲ ʀᴜɴ 24x7 ʟᴀɢ ғʀᴇᴇ ᴡɪᴛʜᴏᴜᴛ sᴛᴏᴘ ✰
  
@@ -29,42 +29,38 @@ start_txt = """**
 async def start(_, msg):
     buttons = [
         [ 
-          InlineKeyboardButton("𝗔𝗗𝗗 𝗠𝗘", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+          InlineKeyboardButton("ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
         ],
         [
-          InlineKeyboardButton("𝗦𝗨𝗣𝗣𝗢𝗥𝗧", url="https://t.me/MASTIWITHFRIENDSXD"),
-          InlineKeyboardButton("𝗢𝗪𝗡𝗘𝗥", url="https://t.me/SHIVANSHDEVS"),
+          InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
+          InlineKeyboardButton("ᴏᴡɴᴇʀ", url="https://t.me/SHASHANKDEVS"),
           ],
                [
-                InlineKeyboardButton("𝗨𝗣𝗗𝗔𝗧𝗘𝗦", url="https://t.me/SHIVANSH474"),
+                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url="https://t.me/SHIVANSH474"),
 
 ],
 [
-              InlineKeyboardButton("𝗕𝗔𝗡 𝗔𝗟𝗟︎", url=f"https://github.com/itzshukla/STRANGER-BANALL/fork"),
-              InlineKeyboardButton("︎𝗩2 𝗠𝗨𝗦𝗜𝗖", url=f"https://github.com/itzshukla/STRANGER-MUSIC/fork"),
+              InlineKeyboardButton("ʙᴀɴ-ᴀʟʟ", url=f"https://github.com/itzshukla/STRANGER-BANALL/fork"),
+              InlineKeyboardButton("︎V2-ᴍᴜsɪᴄ", url=f"https://github.com/itzshukla/STRANGER-MUSIC/fork"),
               ],
               [
-              InlineKeyboardButton("𝗩1 𝗠𝗨𝗦𝗜𝗖", url=f"https://github.com/itzshukla/STRANGER-MUSIC2.0/fork"),
-InlineKeyboardButton("𝗖𝗛𝗔𝗧 𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-CHATBOT/fork"),
+              InlineKeyboardButton("V1 ᴍᴜsɪᴄ", url=f"https://github.com/itzshukla/STRANGER-MUSIC2.0/fork"),
+InlineKeyboardButton("ᴄʜᴀᴛ-ʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-CHATBOT/fork"),
 ],
 [
-InlineKeyboardButton("𝗦𝗧𝗥𝗜𝗡𝗚𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-STRING-GEN/fork"),
-InlineKeyboardButton("𝗠𝗔𝗡𝗔𝗚𝗘𝗠𝗘𝗡𝗧", url=f"https://github.com/itzshukla/STRANGER-ROBOT/fork"),
+InlineKeyboardButton("sᴛʀɪɴɢ-ɢᴇɴ", url=f"https://github.com/itzshukla/STRANGER-STRING-GEN/fork"),
+InlineKeyboardButton("ɢᴄ-ᴍᴀɴᴀɢᴇᴍᴇɴᴛ", url=f"https://github.com/itzshukla/STRANGER-ROBOT/fork"),
 ],
 [
-              InlineKeyboardButton("𝗦𝗣𝗔𝗠 𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-SPAM-X/fork"),
-              InlineKeyboardButton("𝗕𝗔𝗡𝗔𝗟𝗟 10 𝗕𝗢𝗧︎", url=f"https://github.com/itzshukla/STRANGER-BANALL-BOTS/fork"),
+              InlineKeyboardButton("sᴘᴀᴍ-ʙᴏᴛs", url=f"https://github.com/itzshukla/STRANGER-SPAM-X/fork"),
+              InlineKeyboardButton("ʙᴀɴᴀʟʟ 10 ʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-BANALL-BOTS/fork"),
               ],
               [
-              InlineKeyboardButton("𝗦𝗧𝗥𝗜𝗡𝗚 𝗛𝗔𝗖𝗞︎", url=f"https://github.com/itzshukla/STRANGER-SESSION-HACK/fork"),
-InlineKeyboardButton("𝗜𝗗 𝗖𝗛𝗔𝗧 𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-IDCHATBOT/fork"),
+              InlineKeyboardButton("sᴛʀɪɴɢ ʜᴀᴄᴋ", url=f"https://github.com/itzshukla/STRANGER-SESSION-HACK/fork"),
+InlineKeyboardButton("ɪᴅ-ᴜsᴇʀʙᴏᴛ", url=f"https://t.me/StrangerHosterbot"),
 ],
 [
-InlineKeyboardButton("𝗨𝗦𝗘𝗥𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-USERBOT3.0/fork"),
-InlineKeyboardButton("𝗜𝗗-𝗨𝗦𝗘𝗥𝗕𝗢𝗧", url=f"https://t.me/StrangerHosterbot"),
-],
-[
-InlineKeyboardButton("𝗦𝗨𝗣𝗘𝗥-𝗨𝗦𝗘𝗥𝗕𝗢𝗧", url=f"https://github.com/itzshukla/STRANGER-HELLBOT/fork"),
+InlineKeyboardButton("sᴜᴘᴇʀ-ᴜsᴇʀʙᴏᴛ", url=f"https://github.com/itzshukla/STRANGER-HELLBOT/fork"),
 
         ]]
     
