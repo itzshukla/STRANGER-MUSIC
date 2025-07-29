@@ -108,7 +108,7 @@ async def grab(client, message):
                 response_message += "𝗘𝗺𝗮𝗶𝗹: {}\n".format(data['email'])
                 response_message += "𝗔𝗺𝗼𝘂𝗻𝘁: {}\n".format(data['amount'])
                 response_message += "𝗖𝘂𝗿𝗿𝗲𝗻𝗰𝘆: {}\n\n".format(data.get('currency', 'N/A'))
-                response_message += "𝗖𝗵𝗲𝗰𝗸𝗲𝗱 𝗯𝘆 DAXX"
+                response_message += "𝗖𝗵𝗲𝗰𝗸𝗲𝗱 𝗯𝘆 𝗦𝘁𝗿𝗮𝗻𝗴𝗲𝗿"
 
                 await message.reply(response_message, parse_mode=enums.ParseMode.HTML)
             except json.JSONDecodeError as json_err:
