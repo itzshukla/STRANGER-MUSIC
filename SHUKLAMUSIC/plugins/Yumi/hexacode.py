@@ -16,7 +16,7 @@ def text_to_hex(text):
     return hex_representation
 
 
-# SHIVANSH474 ...........................
+# @ITSZSHUKLA ...........................
 
 @app.on_message(filters.command("code"))
 def convert_text(_, message):
