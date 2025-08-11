@@ -24,7 +24,7 @@ async def repo_handler(_, msg):
             InlineKeyboardButton("💬 sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
             InlineKeyboardButton("👤 ᴏᴡɴᴇʀ", url="https://t.me/SHASHANKDEVS"),
         ],
-        [InlineKeyboardButton("🧾 ᴜᴘᴅᴀᴛᴇs", url="https://t.me/SHIVANSH474")],
+        [InlineKeyboardButton("🧾 ᴜᴘᴅᴀᴛᴇs", url="https://t.me/ITSZSHUKLA")],
         [
             InlineKeyboardButton("💥 ʙᴀɴᴀʟʟ", url="https://github.com/itzshukla/STRANGER-BANALL/fork"),
             InlineKeyboardButton("🎧 ᴍᴜsɪᴄ V2", url="https://github.com/itzshukla/STRANGER-MUSIC/fork"),
