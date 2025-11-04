@@ -4,7 +4,7 @@ from config import BOT_USERNAME
 from SHUKLAMUSIC.utils.Shukla_ban import admin_filter
 from SHUKLAMUSIC.mongo.filtersdb import *
 from SHUKLAMUSIC.utils.filters_func import GetFIlterMessage, get_text_reason, SendFilterMessage
-from SHUKLAMUSIC.utils.yumidb import user_admin
+from SHUKLAMUSIC.utils.shivdb import user_admin
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
