@@ -1,6 +1,18 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import json
 import subprocess
-
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -57,11 +69,9 @@ async def alpha_to_int(user_id_alphabet: str) -> int:
     user_id = int(user_id)
     return user_id
 
-
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
-
 
 def seconds_to_min(seconds):
     if seconds is not None:
@@ -81,7 +91,6 @@ def seconds_to_min(seconds):
         elif s > 0:
             return "00:{:02d}".format(s)
     return "-"
-
 
 def speed_converter(seconds, speed):
     if str(speed) == str("0.5"):

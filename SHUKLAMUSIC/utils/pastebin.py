@@ -1,10 +1,20 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import aiohttp
-
-
 import socket
 from asyncio import get_running_loop
 from functools import partial
-
 
 def _netcat(host, port, content):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -18,7 +28,6 @@ def _netcat(host, port, content):
         return data
     s.close()
 
-
 async def paste(content):
     loop = get_running_loop()
     link = await loop.run_in_executor(None, partial(_netcat, "ezup.dev", 9999, content))
@@ -28,7 +37,6 @@ async def paste(content):
 
 BASE = "https://batbin.me/"
 
-
 async def post(url: str, *args, **kwargs):
     async with aiohttp.ClientSession() as session:
         async with session.post(url, *args, **kwargs) as resp:
@@ -37,7 +45,6 @@ async def post(url: str, *args, **kwargs):
             except Exception:
                 data = await resp.text()
         return data
-
 
 async def SHUKLABin(text):
     resp = await post(f"{BASE}api/v2/paste", data=text)
