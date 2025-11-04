@@ -4,7 +4,7 @@ from pyrogram import filters
 from SHUKLAMUSIC.utils.Shukla_ban import admin_filter
 from SHUKLAMUSIC.mongo.notesdb import *
 from SHUKLAMUSIC.utils.notes_func import GetNoteMessage, exceNoteMessageSender, privateNote_and_admin_checker
-from SHUKLAMUSIC.utils.yumidb import user_admin
+from SHUKLAMUSIC.utils.shivdb import user_admin
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup , Message , CallbackQuery
 from pyrogram.enums import ChatMemberStatus
 
