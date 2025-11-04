@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import asyncio
 import random
 import time
@@ -5,7 +18,6 @@ from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from youtubesearchpython.__future__ import VideosSearch
-
 import config
 from SHUKLAMUSIC import app
 from SHUKLAMUSIC.misc import _boot_
@@ -27,19 +39,31 @@ from SHUKLAMUSIC.utils.inline import help_pannel, private_panel, start_panel
 from strings import get_string
 from config import BANNED_USERS
 
-SHASHANK_VD = [
-    "https://telegra.ph/file/89c5023101b65f21fb401.mp4",
-    "https://telegra.ph/file/bbc914cce6cce7f607641.mp4",
-    "https://telegra.ph/file/abc578ecc222d28a861ba.mp4",
-    "https://telegra.ph/file/065f40352707e9b5b7c15.mp4",
-    "https://telegra.ph/file/52ceaf02eae7eed6c9fff.mp4",
-    "https://telegra.ph/file/299108f6ac08f4e65e47a.mp4",
-    "https://telegra.ph/file/7a4e08bd04d628de71fc1.mp4",
-    "https://telegra.ph/file/0ad8b932fe5f7684f941c.mp4",
-    "https://telegra.ph/file/95ebe2065cfb1ac324a1c.mp4",
-    "https://telegra.ph/file/98cf22ccb987f9fedac5e.mp4",
-    "https://telegra.ph/file/f1b1754fc9d01998f24df.mp4",
-    "https://telegra.ph/file/421ee22ed492a7b8ce101.mp4",
+SHASHANK_IMG = [
+"https://graph.org/file/f76fd86d1936d45a63c64.jpg",
+"https://graph.org/file/69ba894371860cd22d92e.jpg",
+"https://graph.org/file/67fde88d8c3aa8327d363.jpg",
+"https://graph.org/file/3a400f1f32fc381913061.jpg",
+"https://graph.org/file/a0893f3a1e6777f6de821.jpg",
+"https://graph.org/file/5a285fc0124657c7b7a0b.jpg",
+"https://graph.org/file/25e215c4602b241b66829.jpg",
+"https://graph.org/file/a13e9733afdad69720d67.jpg",
+"https://graph.org/file/692e89f8fe20554e7a139.jpg",
+"https://graph.org/file/db277a7810a3f65d92f22.jpg",
+"https://graph.org/file/a00f89c5aa75735896e0f.jpg",
+"https://graph.org/file/f86b71018196c5cfe7344.jpg",
+"https://graph.org/file/a3db9af88f25bb1b99325.jpg",
+"https://graph.org/file/5b344a55f3d5199b63fa5.jpg",
+"https://graph.org/file/84de4b440300297a8ecb3.jpg",
+"https://graph.org/file/84e84ff778b045879d24f.jpg",
+"https://graph.org/file/a4a8f0e5c0e6b18249ffc.jpg",
+"https://graph.org/file/df11d8257613418142063.jpg",
+"https://graph.org/file/9e23720fedc47259b6195.jpg",
+"https://graph.org/file/826485f2d7db6f09db8ed.jpg",
+"https://graph.org/file/ff3ad786da825b5205691.jpg",
+"https://graph.org/file/52713c9fe9253ae668f13.jpg",
+"https://graph.org/file/8f8516c86677a8c91bfb1.jpg",
+"https://graph.org/file/6603c3740378d3f7187da.jpg"
 ]
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
@@ -52,8 +76,8 @@ async def start_pm(client, message: Message, _):
 
         if name.startswith("help"):
             keyboard = help_pannel(_)
-            await message.reply_video(
-                random.choice(SHASHANK_VD),
+            await message.reply_photo(
+                random.choice(SHASHANK_IMG),
                 caption=_['help_1'].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
             )
@@ -101,8 +125,8 @@ async def start_pm(client, message: Message, _):
         served_chats = len(await get_served_chats())
         served_users = len(await get_served_users())
         UP, CPU, RAM, DISK = await bot_sys_stats()
-        await message.reply_video(
-            random.choice(SHASHANK_VD),
+        await message.reply_photo(
+            random.choice(SHASHANK_IMG),
             caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM, served_users, served_chats),
             reply_markup=InlineKeyboardMarkup(out),
         )
@@ -117,8 +141,8 @@ async def start_pm(client, message: Message, _):
 async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
-    await message.reply_video(
-        random.choice(SHASHANK_VD),
+    await message.reply_photo(
+        random.choice(SHASHANK_IMG),
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
     )
@@ -154,8 +178,8 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
-                await message.reply_video(
-                    random.choice(SHASHANK_VD),
+                await message.reply_photo(
+                    random.choice(SHASHANK_IMG),
                     caption=_["start_3"].format(
                         message.from_user.mention,
                         app.mention,
