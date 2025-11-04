@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import random
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -14,8 +27,7 @@ BIGBALL = "https://i.gifer.com/8ZUg.gif"
 LANGD = "https://telegra.ph/file/423414459345bf18310f5.gif"
 CUTIE = "https://graph.org/file/24375c6e54609c0e4621c.mp4"
 
-####### masti
-########  CUTE
+
 @app.on_message(filters.command("cutie"))
 async def cutie(_, message):
     if not message.reply_to_message:

@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import os
 import re
 import subprocess
@@ -6,14 +19,11 @@ import traceback
 from inspect import getfullargspec
 from io import StringIO
 from time import time
-
-
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from SHUKLAMUSIC import app
 from config import OWNER_ID
-###########
 
 async def aexec(code, client, message):
     exec(
