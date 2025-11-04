@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 from pyrogram import filters, enums
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -9,12 +22,8 @@ from pyrogram.errors.exceptions.bad_request_400 import (
     UserAdminInvalid,
     BadRequest
 )
-
 import datetime
 from SHUKLAMUSIC import app
-
-
-
 
 
 @app.on_callback_query(filters.regex(r"^unpin"))
@@ -62,7 +71,6 @@ async def unpin_callbacc(client, CallbackQuery):
             ]
         )
     )
-
 
 @app.on_message(filters.command(["unpinall"]))
 async def unpin_command_handler(client, message):
