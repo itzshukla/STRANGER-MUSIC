@@ -1,9 +1,22 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 
 class Helper(object):
-    HELP_M = '''ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.
+    HELP_M = '''<b>ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.
 ᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ
 
-ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : /'''
+ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : /</b>'''
     HELP_ChatGPT = '''<u><b>ᴄʜᴀᴛɢᴘᴛ ᴄᴏᴍᴍᴀɴᴅꜱ :</u></b>
 
 • /ask : ǫᴜᴇʀɪᴇs ᴛʜᴇ ᴀɪ ᴍᴏᴅᴇʟ ᴛᴏ ɢᴇᴛ ᴀ ʀᴇsᴘᴏɴsᴇ ᴛᴏ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ.
@@ -100,24 +113,21 @@ __
 '''
     HELP_Search = '''<u><b>sᴇᴀʀᴄʜ ᴄᴏᴍᴍᴀɴᴅꜱ :</u></b>
 
-• /google <query> : Search the google for the given query.
-• /anime <query>  : Search myanimelist for the given query.
-• /stack <query>  : Search stackoverflow for the given query.
-• /image (/imgs) <query> : Get the images regarding to your query
+• /google <query> : sᴇᴀʀᴄʜ ᴛʜᴇ ɢᴏᴏɢʟᴇ ғᴏʀ ᴛʜᴇ ɢɪᴠᴇɴ ǫᴜᴇʀʏ.
+• /anime <query>  : sᴇᴀʀᴄʜ ᴍʏᴀɴɪᴍᴇʟɪsᴛ ғᴏʀ ᴛʜᴇ ɢɪᴠᴇɴ ǫᴜᴇʀʏ.
+• /stack <query>  : sᴇᴀʀᴄʜ sᴛᴀᴄᴋᴏᴠᴇʀғʟᴏᴡ ғᴏʀ ᴛʜᴇ ɢɪᴠᴇɴ ǫᴜᴇʀʏ.
+• /image (/imgs) <query> : ɢᴇᴛ ᴛʜᴇ ɪᴍᴀɢᴇs ʀᴇɢᴀʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ǫᴜᴇʀʏ
 
 Example:
-/google pyrogram: return top 5 reuslts.
+/google pyrogram: ʀᴇᴛᴜʀɴ ᴛᴏᴘ 5 ʀᴇᴜsʟᴛs.
 '''
 
-    HELP_Font = '''ғᴏɴᴛ
-
-ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴛʜᴇ ғᴏɴᴛ ᴍᴏᴅᴜʟᴇ:
-
-ғᴏɴᴛ ᴍᴏᴅᴜʟᴇ:
+    HELP_Font = '''<b><u>ғᴏɴᴛ ᴇᴅɪᴛɪɴɢ ᴄᴍᴅs :</b></u>
 
 ʙʏ ᴜsɪɴɢ ᴛʜɪs ᴍᴏᴅᴜʟᴇ ʏᴏᴜ ᴄᴀɴ ᴄʜᴀɴɢᴇ ғᴏɴᴛs ᴏғ ᴀɴʏ ᴛᴇxᴛ!
 
 • /font [ᴛᴇxᴛ]
+• /fonts [ᴛᴇxᴛ]
 '''
     HELP_Game = '''<u><b>ɢᴀᴍᴇs ᴄᴏᴍᴍᴀɴᴅs : </u></b>
     
