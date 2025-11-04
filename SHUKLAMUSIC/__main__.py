@@ -1,17 +1,26 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import asyncio
 import importlib
-
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
-
 import config
 from SHUKLAMUSIC import LOGGER, app, userbot
 from SHUKLAMUSIC.core.call import SHUKLA
 from SHUKLAMUSIC.misc import sudo
 from SHUKLAMUSIC.plugins import ALL_MODULES
 from SHUKLAMUSIC.utils.database import get_banned_users, get_gbanned
-from config import BANNED_USERS
-
 
 async def init():
     if (
