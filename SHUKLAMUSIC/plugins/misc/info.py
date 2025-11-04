@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import asyncio, os, time, aiohttp
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -19,7 +32,6 @@ random_photo = [
 
 # --------------------------------------------------------------------------------- #
 
-
 get_font = lambda font_size, font_path: ImageFont.truetype(font_path, font_size)
 resize_text = (
     lambda text_size, text: (text[:text_size] + "...").upper()
@@ -28,7 +40,6 @@ resize_text = (
 )
 
 # --------------------------------------------------------------------------------- #
-
 
 async def get_userinfo_img(
     bg_path: str,

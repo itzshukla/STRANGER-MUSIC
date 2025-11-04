@@ -1,3 +1,16 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
 import random 
 from pyrogram import filters,Client,enums
 from SHUKLAMUSIC import app
@@ -5,7 +18,6 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pyrogram.types import ChatPermissions
 from SHUKLAMUSIC.mongo.nightmodedb import nightdb,nightmode_on,nightmode_off,get_nightchats 
-
 
 
 CLOSE_CHAT = ChatPermissions(
@@ -59,8 +71,7 @@ async def nightcb(_, query : CallbackQuery):
             elif not check_night:
                 await query.message.edit_caption("**๏  ɴɪɢʜᴛᴍᴏᴅᴇ ɪs ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ  ɪɴ ᴛʜɪs ᴄʜᴀᴛ.**") 
             
-    
-    
+      
 async def start_nightmode() :
     chats = []
     schats = await get_nightchats()
