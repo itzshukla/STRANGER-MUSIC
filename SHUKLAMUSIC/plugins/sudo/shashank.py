@@ -6,11 +6,6 @@ from pyrogram import *
 from pyrogram.types import *
 from SHUKLAMUSIC.utils.Shukla_ban import admin_filter
 
-
-
-
-
-
 Yumikoo_text = [
 "hey please don't disturb me.",
 "who are you",    
