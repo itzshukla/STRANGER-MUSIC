@@ -1,3 +1,17 @@
+# -----------------------------------------------
+# 🔸 StrangerMusic Project
+# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 📅 Copyright © 2022 – All Rights Reserved
+#
+# 📖 License:
+# This source code is open for educational and non-commercial use ONLY.
+# You are required to retain this credit in all copies or substantial portions of this file.
+# Commercial use, redistribution, or removal of this notice is strictly prohibited
+# without prior written permission from the author.
+#
+# ❤️ Made with dedication and love by ItzShukla
+# -----------------------------------------------
+
 import re
 from os import getenv
 from dotenv import load_dotenv
@@ -40,8 +54,8 @@ SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/ITSZSHUKLA")
 SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/MASTIWITHFRIENDSXD")
 
 # YT-API Get from @AmShashank on tg
-YOUR_API_KEY = getenv("YOUR_API_KEY", "")
-YOUR_API_URL = getenv("YOUR_API_URL", "")
+YOUR_API_KEY = getenv("YOUR_API_KEY", "stranger")
+YOUR_API_URL = getenv("YOUR_API_URL", "http://46.38.237.240:8000")
 
 # Assistant settings
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "True")
@@ -79,9 +93,10 @@ votemode = {}
 autoclean = []
 confirmer = {}
 
-DEBUG_IGNORE_LOG =True
+DEBUG_IGNORE_LOG = True
 
-# Image URLs
+###### IMAGE URLS ######
+
 START_IMG_URL = getenv("START_IMG_URL", "https://telegra.ph/file/b61227af05544deb76a34.jpg")
 PING_IMG_URL = getenv("PING_IMG_URL", "https://telegra.ph/file/7bb907999ea7156227283.jpg")
 PLAYLIST_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
@@ -97,6 +112,7 @@ SPOTIFY_PLAYLIST_IMG_URL = "https://telegra.ph/file/6c741a6bc1e1663ac96fc.jpg"
 
 # Helper function
 def time_to_seconds(time: str) -> int:
+    """Convert time string (MM:SS) to total seconds."""
     return sum(int(x) * 60**i for i, x in enumerate(reversed(time.split(":"))))
 
 # Calculate total duration limit in seconds
@@ -104,11 +120,7 @@ DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
 
 # Validate URLs
 if SUPPORT_CHANNEL and not re.match(r"(?:http|https)://", SUPPORT_CHANNEL):
-    raise SystemExit(
-        "[ERROR] - Your SUPPORT_CHANNEL url is invalid. It must start with https://"
-    )
+    raise SystemExit("[ERROR] - Your SUPPORT_CHANNEL url is invalid. It must start with https://")
 
 if SUPPORT_CHAT and not re.match(r"(?:http|https)://", SUPPORT_CHAT):
-    raise SystemExit(
-        "[ERROR] - Your SUPPORT_CHAT url is invalid. It must start with https://"
-    )
+    raise SystemExit("[ERROR] - Your SUPPORT_CHAT url is invalid. It must start with https://")
