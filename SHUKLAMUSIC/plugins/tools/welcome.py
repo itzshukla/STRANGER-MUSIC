@@ -65,7 +65,7 @@ class temp:
     B_NAME = None
 
 
-def circle(pfp, size=(500, 500), brightness_factor=10):
+def circle(pfp, size=(535, 535), brightness_factor=10):
     pfp = pfp.resize(size).convert("RGBA")
     pfp = ImageEnhance.Brightness(pfp).enhance(brightness_factor)
     bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
@@ -82,11 +82,11 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     background = Image.open("SHUKLAMUSIC/assets/wel2.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor)
-    pfp = pfp.resize((500, 500))
+    pfp = pfp.resize((535, 535))
     draw = ImageDraw.Draw(background)
     font = ImageFont.truetype('SHUKLAMUSIC/assets/font.ttf', size=60)
-    draw.text((630, 450), f'ID: {id}', fill=(255, 255, 255), font=font)
-    pfp_position = (48, 88)
+    draw.text((655, 465), f'ID: {id}', fill=(255, 255, 255), font=font)
+    pfp_position = (50, 90)
     background.paste(pfp, pfp_position, pfp)
     background.save(f"downloads/welcome#{id}.png")
     return f"downloads/welcome#{id}.png"
@@ -153,8 +153,7 @@ async def greet_new_member(_, member: ChatMemberUpdated):
                 chat_id,
                 photo=welcomeimg,
                 caption=f"""
-**⎊─────☵ ᴡᴇʟᴄᴏᴍᴇ ☵─────⎊**
-
+ㅤㅤ◦•●◉✿ ᴡᴇʟᴄᴏᴍᴇ ✿◉●•◦
 **▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
 
 **☉ ɴᴀᴍᴇ ⧽** {user.mention}
@@ -163,8 +162,6 @@ async def greet_new_member(_, member: ChatMemberUpdated):
 **☉ ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀs ⧽** {count}
 
 **▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
-
-**⎉──────▢✭ 侖 ✭▢──────⎉**
 """,
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton(button_text, url=deep_link)],
@@ -175,7 +172,7 @@ async def greet_new_member(_, member: ChatMemberUpdated):
             temp.MELCOW[f"welcome-{chat_id}"] = msg
 
             # ✅ Auto-delete welcome message in 3 minutes
-            await asyncio.sleep(180)
+            await asyncio.sleep(300)
             await msg.delete()
 
         except Exception as e:
