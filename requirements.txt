@@ -53,7 +53,7 @@ pydub
 pyfiglet
 pykeyboard
 python-dotenv==1.0.1
-python-telegram-bot==21.1.1
+python-telegram-bot==22.5
 python-whois
 pyshorteners
 pyttsx3
