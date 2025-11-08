@@ -44,7 +44,7 @@ motor
 numpy
 openai==0.28.0
 opencv-python
-pillow==9.5.0
+pillow==12.0.0
 psutil
 pickledb
 pycountry
