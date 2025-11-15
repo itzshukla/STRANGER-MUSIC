@@ -42,7 +42,7 @@ Press the below button to Fast deploy on Heroku/Raiwlay
 Either you could locally host or deploy on [Heroku](https://heroku.com)
 ### 💜 Heroku
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/itzshukla/STRANGER-MUSIC"> <img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/godfather928977-cpu/GOD_FATHER/edit/VIKASH_MUSIC"> <img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
 
 <br>
 
