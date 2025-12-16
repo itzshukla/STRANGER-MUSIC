@@ -42,7 +42,7 @@ instaloader
 lexica-api
 motor 
 numpy
-openai==0.28.0
+openai==2.13.0
 opencv-python
 pillow==9.5.0
 psutil
