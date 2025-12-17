@@ -36,7 +36,7 @@ gtts
 hachoir
 heroku3
 httpx==0.27.0
-kurigram==2.2.6
+kurigram==2.2.15
 img2pdf
 instaloader
 lexica-api
