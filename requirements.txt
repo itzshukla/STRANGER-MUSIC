@@ -55,6 +55,7 @@ requests
 SafoneAPI
 speedtest-cli
 SpeechRecognition
+search_engine_parser
 spotipy
 telegraph
 tgcrypto
