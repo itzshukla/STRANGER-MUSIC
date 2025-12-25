@@ -12,9 +12,8 @@
 # ❤️ Made with dedication and love by ItzShukla
 # -----------------------------------------------
 import asyncio
-from telegram import CallbackQuery
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 from SHUKLAMUSIC import YouTube, app
 from SHUKLAMUSIC.core.call import SHUKLA
 from SHUKLAMUSIC.misc import SUDOERS, db
