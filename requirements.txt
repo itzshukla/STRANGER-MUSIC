@@ -46,8 +46,9 @@ python-whois
 pyshorteners
 pyttsx3
 pytz
-pytube
+pyrofork
 py-tgcalls
+pyrofork
 pyyaml
 qrcode
 requests
