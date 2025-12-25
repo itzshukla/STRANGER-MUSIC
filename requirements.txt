@@ -50,6 +50,7 @@ pyrofork
 py-tgcalls
 pyrofork
 pyyaml
+py-yt-search
 qrcode
 requests
 SafoneAPI
