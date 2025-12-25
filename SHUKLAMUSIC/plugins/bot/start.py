@@ -17,7 +17,7 @@ import time
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from youtubesearchpython.__future__ import VideosSearch
+from py_yt import VideosSearch
 import config
 from SHUKLAMUSIC import app
 from SHUKLAMUSIC.misc import _boot_
