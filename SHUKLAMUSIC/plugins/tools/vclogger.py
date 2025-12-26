@@ -10,7 +10,7 @@ from pyrogram.types import (
 )
 from pyrogram.raw import functions
 from SHUKLAMUSIC import app
-from SHUKLAMUSIC.utils.database.assistantdatabase import get_assistant
+from SHUKLAMUSIC.utils.database import get_assistant
 
 LOGGER = getLogger(__name__)
 
