@@ -45,15 +45,23 @@ async def brah3(app :app, message:Message):
 
 ####
 
-@app.on_message(filters.command("math", prefixes="/"))
-def calculate_math(client, message):   
-    expression = message.text.split("/math ", 1)[1]
-    try:        
+@app.on_message(filters.command("math"))
+async def calculate_math(client, message: Message):
+    if len(message.command) < 2:
+        return await message.reply_text(
+            "❌ Usage:\n`/math 2+2`",
+            quote=True
+        )
+
+    expression = message.text.split(None, 1)[1]
+
+    try:
         result = eval(expression)
-        response = f"ᴛʜᴇ ʀᴇsᴜʟᴛ ɪs : {result}"
-    except:
-        response = "ɪɴᴠᴀʟɪᴅ ᴇxᴘʀᴇssɪᴏɴ"
-    message.reply(response)
+        response = f"✅ **Result:** `{result}`"
+    except Exception:
+        response = "❌ **Invalid expression**"
+
+    await message.reply_text(response, quote=True)
 
 ###
 @app.on_message(filters.command("leavegroup")& filters.user(OWNER_ID))
@@ -75,7 +83,7 @@ async def search(event):
         async with session.get(f"https://content-customsearch.googleapis.com/customsearch/v1?cx=ec8db9e1f9e41e65e&q={event.text.split()[1]}&key=AIzaSyAa8yy0GdcGPHdtD083HiGGx_S0vMPScDM&start={start}", headers={"x-referer": "https://explorer.apis.google.com"}) as r:
             response = await r.json()
             result = ""
-            
+
             if not response.get("items"):
                 return await msg.edit("No results found!")
             for item in response["items"]:
