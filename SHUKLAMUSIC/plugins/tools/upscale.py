@@ -11,115 +11,62 @@
 #
 # ❤️ Made with dedication and love by ItzShukla
 # -----------------------------------------------
+import base64
+import httpx
 import os
-import aiohttp
-import aiofiles
-from config import DEEP_API
+import config 
+from config import BOT_USERNAME
 from SHUKLAMUSIC import app
-from pyrogram import filters
-from pyrogram.types import Message
+from pyrogram import Client, filters
+import pyrogram
+from uuid import uuid4
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+import aiofiles, aiohttp, requests
 
-async def download_from_url(path: str, url: str) -> str:
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+async def image_loader(image: str, link: str):
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
+        async with session.get(link) as resp:
             if resp.status == 200:
-                async with aiofiles.open(path, mode="wb") as f:
-                    await f.write(await resp.read())
-                return path
-    return None
+                f = await aiofiles.open(image, mode="wb")
+                await f.write(await resp.read())
+                await f.close()
+                return image
+            return image
 
-
-async def post_file(url: str, file_path: str, headers: dict):
-    async with aiohttp.ClientSession() as session:
-        with open(file_path, 'rb') as f:
-            form = aiohttp.FormData()
-            form.add_field('image', f, filename=os.path.basename(file_path), content_type='application/octet-stream')
-
-            async with session.post(url, data=form, headers=headers) as resp:
-                return await resp.json()
-
-
-async def post_data(url: str, data: dict, headers: dict):
-    async with aiohttp.ClientSession() as session:
-        async with session.post(url, data=data, headers=headers) as resp:
-            return await resp.json()
-
-
-@app.on_message(filters.command("upscale"))
-async def upscale_image(_, message: Message):
-    if not DEEP_API:
-        return await message.reply_text("🚫 Missing DeepAI API key.")
-
-    reply = message.reply_to_message
-    if not reply or not reply.photo:
-        return await message.reply_text("📎 Please reply to an image.")
-
-    status = await message.reply_text("🔄 Upscaling image...")
-
-    try:
-        local_path = await reply.download()
-        resp = await post_file(
-            "https://api.deepai.org/api/torch-srgan",
-            local_path,
-            headers={'api-key': DEEP_API}
-        )
-
-        image_url = resp.get("output_url")
-        if not image_url:
-            return await status.edit("❌ Upscale request failed.")
-
-        final_path = await download_from_url(local_path, image_url)
-        if not final_path:
-            return await status.edit("❌ Could not download result.")
-
-        await status.delete()
-        await message.reply_document(final_path)
-
-    except Exception as e:
-        await status.edit(f"⚠️ Error: `{str(e)}`")
-
-
-@app.on_message(filters.command("getdraw"))
-async def draw_image(_, message: Message):
-    if not DEEP_API:
-        return await message.reply_text("🚫 DeepAI API key is missing.")
-
-    reply = message.reply_to_message
-    query = None
-
-    if reply and reply.text:
-        query = reply.text
-    elif len(message.command) > 1:
-        query = message.text.split(None, 1)[1]
-
-    if not query:
-        return await message.reply_text("💬 Please reply or provide text.")
-
-    status = await message.reply_text("🎨 Generating image...")
-
-    user_id = message.from_user.id
+@app.on_message(filters.command("upscale", prefixes="/"))
+async def upscale_image(client, message):
     chat_id = message.chat.id
-    temp_path = f"cache/{user_id}_{chat_id}_{message.id}.png"
+    replied = message.reply_to_message
+    if not replied:
+        return await message.reply_text("Please Reply To An Image ...")
+    if not replied.photo:
+        return await message.reply_text("Please Reply To An Image ...")
+
+    aux = await message.reply_text("Please Wait ...")
+    image = await replied.download()
 
     try:
-        resp = await post_data(
-            "https://api.deepai.org/api/text2img",
-            data={'text': query, 'grid_size': '1', 'image_generator_version': 'hd'},
-            headers={'api-key': DEEP_API}
+        # Use the DeepAI API to upscale the image
+        response = requests.post(
+            "https://api.deepai.org/api/torch-srgan",
+            files={
+                'image': open(image, 'rb'),
+            },
+            headers={'api-key': 'bf9ee957-9fad-46f5-a403-3e96ca9004e4'}
         )
+        response.raise_for_status()  # Raise an exception for HTTP errors
 
-        image_url = resp.get("output_url")
-        if not image_url:
-            return await status.edit("❌ Failed to generate image.")
+        data = response.json()
+        image_link = data.get("output_url")
 
-        final_path = await download_from_url(temp_path, image_url)
-        if not final_path:
-            return await status.edit("❌ Error downloading image.")
-
-        await status.delete()
-        await message.reply_photo(final_path, caption=f"`{query}`")
-
+        if image_link:
+            downloaded_image = await image_loader(image, image_link)
+            await aux.delete()
+            return await message.reply_document(downloaded_image)
+        else:
+            await aux.edit_text("Failed to get the output image link.")
+    except requests.exceptions.RequestException as e:
+        await aux.edit_text(f"Request failed: {str(e)}")
     except Exception as e:
-        await status.edit(f"⚠️ Error: `{str(e)}`")
+        await aux.edit_text(f"An unexpected error occurred: {str(e)}")
