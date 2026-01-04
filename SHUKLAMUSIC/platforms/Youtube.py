@@ -22,57 +22,101 @@ import yt_dlp
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from py_yt import VideosSearch
-from ..utils.database import is_on_off
+from ..utils.database import is_on_off, get_assistant
 from ..utils.formatters import time_to_seconds
 from SHUKLAMUSIC import app
+from SHUKLAMUSIC.core.userbot import assistants
 import random
 import logging
 import aiohttp
 from SHUKLAMUSIC import LOGGER
 from urllib.parse import urlparse
 
-API_BASE_URL = "http://139.59.31.247:8080"
-API_KEY = os.getenv("API_KEY", "")
+API_BASE_URL = "https://riyabots.site"
+API_KEY = os.getenv("API_KEY", "put_your_key")
 
 async def get_telegram_file(telegram_url: str, video_id: str, file_type: str) -> str:
     logger = LOGGER("StrangerAPI/Youtube.py")
     try:
         extension = ".webm" if file_type == "audio" else ".mkv"
         file_path = os.path.join("downloads", f"{video_id}{extension}")
-
+        
         if os.path.exists(file_path):
             logger.info(f"📂 [LOCAL] File exists: {video_id}")
             return file_path
-
+        
         parsed = urlparse(telegram_url)
         parts = parsed.path.strip("/").split("/")
-
+        
         if len(parts) < 2:
             logger.error(f"❌ Invalid Telegram link format: {telegram_url}")
             return None
-
+            
         channel_name = parts[0]
         message_id = int(parts[1])
-
+        
         logger.info(f"📥 [TELEGRAM] Downloading from @{channel_name}/{message_id}")
-
-        msg = await app.get_messages(channel_name, message_id)
-
-        os.makedirs("downloads", exist_ok=True)
-        await msg.download(file_name=file_path)
-
-        timeout = 0
-        while not os.path.exists(file_path) and timeout < 60:
-            await asyncio.sleep(0.5)
-            timeout += 0.5
-
-        if os.path.exists(file_path):
-            logger.info(f"✅ [TELEGRAM] Downloaded: {video_id}")
-            return file_path
-        else:
-            logger.error(f"❌ [TELEGRAM] Timeout: {video_id}")
+        
+        shuffled_assistants = assistants.copy()
+        random.shuffle(shuffled_assistants)
+        
+        for idx, assistant_num in enumerate(shuffled_assistants):
+            try:
+                temp_chat_id = -1000000000000 - assistant_num
+                assistant_client = await get_assistant(temp_chat_id)
+                
+                if not assistant_client:
+                    continue
+                
+                msg = await assistant_client.get_messages(channel_name, message_id)
+                
+                os.makedirs("downloads", exist_ok=True)
+                await msg.download(file_name=file_path)
+                
+                timeout = 0
+                while not os.path.exists(file_path) and timeout < 60:
+                    await asyncio.sleep(0.5)
+                    timeout += 0.5
+                
+                if os.path.exists(file_path):
+                    logger.info(f"✅ [TELEGRAM] Downloaded: {video_id}")
+                    return file_path
+                
+            except Exception as e:
+                error_msg = str(e)
+                
+                if "FLOOD_WAIT" in error_msg.upper() or "420" in error_msg:
+                    if idx < len(shuffled_assistants) - 1:
+                        continue
+                    else:
+                        break
+                else:
+                    if idx < len(shuffled_assistants) - 1:
+                        continue
+                    else:
+                        break
+        
+        try:
+            msg = await app.get_messages(channel_name, message_id)
+            
+            os.makedirs("downloads", exist_ok=True)
+            await msg.download(file_name=file_path)
+            
+            timeout = 0
+            while not os.path.exists(file_path) and timeout < 60:
+                await asyncio.sleep(0.5)
+                timeout += 0.5
+            
+            if os.path.exists(file_path):
+                logger.info(f"✅ [TELEGRAM] Downloaded: {video_id}")
+                return file_path
+            else:
+                logger.error(f"❌ [TELEGRAM] Timeout: {video_id}")
+                return None
+        except Exception as e:
+            logger.error(f"❌ [TELEGRAM] Failed to download {video_id}: {e}")
             return None
-
+        
     except Exception as e:
         logger.error(f"❌ [TELEGRAM] Failed to download {video_id}: {e}")
         return None
@@ -102,30 +146,30 @@ async def download_song(link: str) -> str:
                 "video_id": video_id,
                 "api_key": API_KEY
             }
-
+            
             logger.info(f"🔄 [AUDIO] Requesting from API: {video_id}")
-
+            
             async with session.get(
                 url,
                 params=params,
                 timeout=aiohttp.ClientTimeout(total=60)
             ) as response:
-
+                
                 if response.status != 200:
                     logger.error(f"❌ [AUDIO] API error: {response.status}")
                     return None
-
+                
                 data = await response.json()
                 logger.info(f"📦 [AUDIO] API Response: {data}")
-
+                
                 if data.get("telegram_url"):
                     telegram_url = data["telegram_url"]
                     status = data.get("status", "unknown")
-
+                    
                     logger.info(f"🔗 [AUDIO] Status: {status} | Telegram URL: {telegram_url}")
-
+                    
                     downloaded_file = await get_telegram_file(telegram_url, video_id, "audio")
-
+                    
                     if downloaded_file:
                         logger.info(f"🎉 [AUDIO] Successfully downloaded: {video_id}")
                         return downloaded_file
@@ -168,30 +212,30 @@ async def download_video(link: str) -> str:
                 "video_id": video_id,
                 "api_key": API_KEY
             }
-
+            
             logger.info(f"🔄 [VIDEO] Requesting from API: {video_id}")
-
+            
             async with session.get(
                 url,
                 params=params,
                 timeout=aiohttp.ClientTimeout(total=60)
             ) as response:
-
+                
                 if response.status != 200:
                     logger.error(f"❌ [VIDEO] API error: {response.status}")
                     return None
-
+                
                 data = await response.json()
                 logger.info(f"📦 [VIDEO] API Response: {data}")
-
+                
                 if data.get("telegram_url"):
                     telegram_url = data["telegram_url"]
                     status = data.get("status", "unknown")
-
+                    
                     logger.info(f"🔗 [VIDEO] Status: {status} | Telegram URL: {telegram_url}")
-
+                    
                     downloaded_file = await get_telegram_file(telegram_url, video_id, "video")
-
+                    
                     if downloaded_file:
                         logger.info(f"🎉 [VIDEO] Successfully downloaded: {video_id}")
                         return downloaded_file
@@ -235,12 +279,12 @@ async def check_file_size(link):
     info = await get_format_info(link)
     if info is None:
         return None
-
+    
     formats = info.get('formats', [])
     if not formats:
         print("No formats found.")
         return None
-
+    
     total_size = parse_size(formats)
     return total_size
 
@@ -446,7 +490,7 @@ class YouTubeAPI:
                     return downloaded_file, True
                 else:
                     return None, False
-
+                    
         except Exception as e:
             logger = LOGGER("StrangerAPI/Youtube.py")
             logger.error(f"❌ Download failed: {e}")
