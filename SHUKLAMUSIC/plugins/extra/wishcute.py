@@ -18,7 +18,6 @@ import config
 import requests
 from SHUKLAMUSIC import app 
 
-SUPPORT_CHAT = "MASTIWITHFRIENDSXD"
 
 @app.on_message(filters.command("wish"))
 async def wish(_, m):
