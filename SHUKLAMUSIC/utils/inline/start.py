@@ -39,7 +39,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(text=_["S_B_5"], user_id=config.OWNER_ID),
-            InlineKeyboardButton(text=_["S_B_6"], callback_data="shiv_Shashank"),
+            InlineKeyboardButton(text=_["S_B_10"], callback_data="shiv_Shashank"),
         ],
         [
             InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),
