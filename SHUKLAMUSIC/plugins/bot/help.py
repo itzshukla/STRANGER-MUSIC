@@ -25,7 +25,12 @@ from strings import get_string, helpers
 from SHUKLAMUSIC.utils.stuffs.buttons import BUTTONS
 from SHUKLAMUSIC.utils.stuffs.helper import Helper
 
-
+EFFECT_IDS = [
+    5046509860389126442,
+    5107584321108051014,
+    5104841245755180586,
+    5159385139981059251,
+]
 
 @app.on_message(filters.command(["help"]) & filters.private & ~BANNED_USERS)
 @app.on_callback_query(filters.regex("settings_back_helper") & ~BANNED_USERS)
@@ -57,13 +62,18 @@ async def helper_private(
             random.choice(SHASHANK_IMG),
             caption=_["help_1"].format(SUPPORT_CHAT),
             reply_markup=keyboard,
+            message_effect_id=random.choice(EFFECT_IDS),
         )
 
 @app.on_message(filters.command(["help"]) & filters.group & ~BANNED_USERS)
 @LanguageStart
 async def help_com_group(client, message: Message, _):
     keyboard = private_help_panel(_)
-    await message.reply_text(_["help_2"], reply_markup=InlineKeyboardMarkup(keyboard))
+    await message.reply_text(
+        _["help_2"], 
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        message_effect_id=random.choice(EFFECT_IDS),
+    )
 
 
 @app.on_callback_query(filters.regex("help_callback") & ~BANNED_USERS)
@@ -102,8 +112,8 @@ async def helper_cb(client, CallbackQuery, _):
         await CallbackQuery.edit_message_text(helpers.HELP_14, reply_markup=keyboard)
     elif cb == "hb15":
         await CallbackQuery.edit_message_text(helpers.HELP_15, reply_markup=keyboard)
-        
-        
+
+
 @app.on_callback_query(filters.regex("mbot_cb") & ~BANNED_USERS)
 async def helper_cb(client, CallbackQuery):
     await CallbackQuery.edit_message_text(Helper.HELP_M, reply_markup=InlineKeyboardMarkup(BUTTONS.MBUTTON))
