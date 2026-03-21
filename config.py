@@ -107,7 +107,7 @@ SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
 SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
 
 
-SHASHANK_PIC = [
+SHASHANK_IMG = [
     "https://files.catbox.moe/dw0as6.jpg",
     "https://files.catbox.moe/t2m1pv.jpg",
     "https://files.catbox.moe/lsbotb.jpg",
