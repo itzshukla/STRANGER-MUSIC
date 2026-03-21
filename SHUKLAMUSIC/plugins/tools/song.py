@@ -14,6 +14,7 @@
 
 import os
 import re
+import aiohttp
 from pyrogram import filters
 from pyrogram.enums import ChatAction
 from pyrogram.types import (
@@ -24,11 +25,8 @@ from pyrogram.types import (
     Message,
 )
 
-class InlineKeyboardBuilder(list):
-    def row(self, *buttons):
-        self.append(list(buttons))
-
 from SHUKLAMUSIC import app, YouTube
+from SHUKLAMUSIC.platforms.Youtube import API_URL, download_song, download_video
 from config import (
     BANNED_USERS,
     SONG_DOWNLOAD_DURATION,
@@ -41,7 +39,34 @@ from SHUKLAMUSIC.utils.inline.song import song_markup
 
 SONG_COMMAND = ["song"]
 
-# ───────────────────────────── COMMANDS ───────────────────────────── #
+
+async def get_formats_from_api(vidid: str) -> list:
+    formats_available = []
+    async with aiohttp.ClientSession() as session:
+        for media_type in ("audio", "video"):
+            try:
+                async with session.get(
+                    f"{API_URL}/formats",
+                    params={"url": vidid, "type": media_type},
+                    timeout=aiohttp.ClientTimeout(total=10),
+                ) as resp:
+                    if resp.status != 200:
+                        continue
+                    data = await resp.json()
+                    for fmt in data.get("formats", []):
+                        formats_available.append({
+                            "format": fmt.get("format", f"{media_type} - {fmt.get('quality', '')}"),
+                            "filesize": fmt.get("filesize"),
+                            "format_id": fmt.get("format_id", media_type),
+                            "ext": fmt.get("ext", "mp3" if media_type == "audio" else "mp4"),
+                            "format_note": fmt.get("quality") or fmt.get("format_note", media_type.title()),
+                            "type": media_type,
+                        })
+            except Exception:
+                continue
+    return formats_available
+
+
 @app.on_message(filters.command(SONG_COMMAND) & filters.group & ~BANNED_USERS)
 @capture_err
 @language
@@ -53,6 +78,7 @@ async def song_command_group(client, message: Message, lang):
                                    url=f"https://t.me/{app.username}?start=song")]]
         ),
     )
+
 
 @app.on_message(filters.command(SONG_COMMAND) & filters.private & ~BANNED_USERS)
 @capture_err
@@ -86,7 +112,7 @@ async def song_command_private(client, message: Message, lang):
         reply_markup=InlineKeyboardMarkup(song_markup(lang, vidid)),
     )
 
-# ───────────────────────────── CALLBACKS ───────────────────────────── #
+
 @app.on_callback_query(filters.regex(r"song_back") & ~BANNED_USERS)
 @capture_callback_err
 @languageCB
@@ -96,6 +122,7 @@ async def songs_back_helper(client, cq, lang):
     await cq.edit_message_reply_markup(
         reply_markup=InlineKeyboardMarkup(song_markup(lang, vidid))
     )
+
 
 @app.on_callback_query(filters.regex(r"song_helper") & ~BANNED_USERS)
 @capture_callback_err
@@ -110,46 +137,52 @@ async def song_helper_cb(client, cq, lang):
         pass
 
     try:
-        formats, _yturl = await YouTube.formats(vidid)
+        formats = await get_formats_from_api(vidid)
     except Exception:
         return await cq.edit_message_text(lang["song_7"])
 
-    kb = InlineKeyboardBuilder()             # ← was InlineKeyboard()
+    if not formats:
+        return await cq.edit_message_text(lang["song_7"])
 
+    buttons = []
     seen = set()
+
     if stype == "audio":
         for f in formats:
-            if "audio" not in f["format"] or not f["filesize"]:
+            if f.get("type") != "audio":
                 continue
             label = f["format_note"].title()
             if label in seen:
                 continue
             seen.add(label)
-            kb.row(
-                InlineKeyboardButton(
-                    text=f"{label} • {convert_bytes(f['filesize'])}",
-                    callback_data=f"song_download {stype}|{f['format_id']}|{vidid}",
-                )
-            )
+            size_text = convert_bytes(f["filesize"]) if f.get("filesize") else ""
+            btn_text = f"{label} • {size_text}" if size_text else label
+            buttons.append([InlineKeyboardButton(
+                text=btn_text,
+                callback_data=f"song_download {stype}|{f['format_id']}|{vidid}",
+            )])
     else:
-        allowed = {160, 133, 134, 135, 136, 137, 298, 299, 264, 304, 266}
         for f in formats:
-            if not f["filesize"] or int(f["format_id"]) not in allowed:
+            if f.get("type") != "video":
                 continue
-            res = f["format"].split("-")[1]
-            kb.row(
-                InlineKeyboardButton(
-                    text=f"{res} • {convert_bytes(f['filesize'])}",
-                    callback_data=f"song_download {stype}|{f['format_id']}|{vidid}",
-                )
-            )
+            label = f["format_note"].title()
+            if label in seen:
+                continue
+            seen.add(label)
+            size_text = convert_bytes(f["filesize"]) if f.get("filesize") else ""
+            btn_text = f"{label} • {size_text}" if size_text else label
+            buttons.append([InlineKeyboardButton(
+                text=btn_text,
+                callback_data=f"song_download {stype}|{f['format_id']}|{vidid}",
+            )])
 
-    kb.row(
+    buttons.append([
         InlineKeyboardButton(lang["BACK_BUTTON"], callback_data=f"song_back {stype}|{vidid}"),
         InlineKeyboardButton(lang["CLOSE_BUTTON"], callback_data="close"),
-    )
-    # convert to native markup here
-    await cq.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(kb))
+    ])
+
+    await cq.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
+
 
 @app.on_callback_query(filters.regex(r"song_download") & ~BANNED_USERS)
 @capture_callback_err
@@ -173,9 +206,7 @@ async def song_download_cb(client, cq, lang):
         duration_sec = time_to_seconds(info.get("duration_min")) if info.get("duration_min") else None
 
         if stype == "audio":
-            file_path, _ = await YouTube.download(
-                yturl, mystic, songaudio=True, format_id=fmt_id, title=title
-            )
+            file_path = await download_song(yturl)
             await mystic.edit_text(lang["song_11"])
             await app.send_chat_action(cq.message.chat.id, ChatAction.UPLOAD_AUDIO)
             await cq.edit_message_media(
@@ -187,10 +218,8 @@ async def song_download_cb(client, cq, lang):
                     performer=info.get("uploader"),
                 )
             )
-        else:  # video
-            file_path, _ = await YouTube.download(
-                yturl, mystic, songvideo=True, format_id=fmt_id, title=title
-            )
+        else:
+            file_path = await download_video(yturl)
             w, h = cq.message.photo.width, cq.message.photo.height
             await mystic.edit_text(lang["song_11"])
             await app.send_chat_action(cq.message.chat.id, ChatAction.UPLOAD_VIDEO)
