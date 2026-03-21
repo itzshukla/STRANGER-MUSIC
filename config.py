@@ -53,10 +53,6 @@ GIT_TOKEN = getenv("GIT_TOKEN", None)
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/ITSZSHUKLA")
 SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/MASTIWITHFRIENDSXD")
 
-# YT-API Get from @AmShashank on tg
-YOUR_API_KEY = getenv("YOUR_API_KEY", "stranger")
-YOUR_API_URL = getenv("YOUR_API_URL", "http://46.38.237.240:8000")
-
 # Assistant settings
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "True")
 AUTO_LEAVE_ASSISTANT_TIME = int(getenv("ASSISTANT_LEAVE_TIME", "9000"))
@@ -97,18 +93,30 @@ DEBUG_IGNORE_LOG = True
 
 ###### IMAGE URLS ######
 
-START_IMG_URL = getenv("START_IMG_URL", "https://telegra.ph/file/b61227af05544deb76a34.jpg")
-PING_IMG_URL = getenv("PING_IMG_URL", "https://telegra.ph/file/7bb907999ea7156227283.jpg")
-PLAYLIST_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
-STATS_IMG_URL = "https://telegra.ph/file/d30d11c4365c025c25e3e.jpg"
-TELEGRAM_AUDIO_URL = "https://telegra.ph/file/13afb9ee5c5da17930f1e.png"
-TELEGRAM_VIDEO_URL = "https://telegra.ph/file/13afb9ee5c5da17930f1e.png"
-STREAM_IMG_URL = "https://telegra.ph/file/03efec694e41e891b29dc.jpg"
-SOUNCLOUD_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
-YOUTUBE_IMG_URL = "https://telegra.ph/file/4dc854f961cd3ce46899b.jpg"
-SPOTIFY_ARTIST_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
-SPOTIFY_ALBUM_IMG_URL = "https://telegra.ph/file/6c741a6bc1e1663ac96fc.jpg"
-SPOTIFY_PLAYLIST_IMG_URL = "https://telegra.ph/file/6c741a6bc1e1663ac96fc.jpg"
+START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/ak96mx.jpg")
+PING_IMG_URL = getenv("PING_IMG_URL", "https://files.catbox.moe/ak96mx.jpg")
+PLAYLIST_IMG_URL = "https://files.catbox.moe/lrwbj6.jpg"
+STATS_IMG_URL = "https://files.catbox.moe/ak96mx.jpg"
+TELEGRAM_AUDIO_URL = "https://files.catbox.moe/aesldg.jpg"
+TELEGRAM_VIDEO_URL = "https://files.catbox.moe/aesldg.jpg"
+STREAM_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+SOUNCLOUD_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+YOUTUBE_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
+
+
+SHASHANK_PIC = [
+    "https://files.catbox.moe/dw0as6.jpg",
+    "https://files.catbox.moe/t2m1pv.jpg",
+    "https://files.catbox.moe/lsbotb.jpg",
+    "https://files.catbox.moe/huuy1f.jpg",
+    "https://files.catbox.moe/7vfivr.jpg",
+    "https://files.catbox.moe/dqtuv2.jpg",
+    "https://files.catbox.moe/ac3tzn.jpg"
+]
+
 
 # Helper function
 def time_to_seconds(time: str) -> int:
