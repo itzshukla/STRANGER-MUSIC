@@ -32,7 +32,7 @@ start_txt = """<b>✨ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ <u>sᴛʀᴀɴɢᴇʀ ʀᴇᴘ
 @app.on_message(filters.command("repo"))
 async def repo_handler(_, msg):
     buttons = [
-        [InlineKeyboardButton("➕ ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
+        [InlineKeyboardButton("➕ ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/{app.username}?startgroup=true")],
         [
             InlineKeyboardButton("💬 sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
             InlineKeyboardButton("👤 ᴏᴡɴᴇʀ", url="https://t.me/SHASHANKDEVS"),
