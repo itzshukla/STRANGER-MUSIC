@@ -12,6 +12,8 @@
 # ❤️ Made with dedication and love by ItzShukla
 # -----------------------------------------------
 from pyrogram import filters
+import asyncio
+from time import time, strftime, gmtime
 from pyrogram.enums import ChatType
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import (
@@ -126,6 +128,23 @@ async def support(client, CallbackQuery, _):
         ),
     )
 
+
+@app.on_callback_query(filters.regex("^api_status$"))
+async def show_bot_info(c: app, q: CallbackQuery):
+    start = time()
+    await asyncio.sleep(0.1)
+    delta_ping = time() - start
+    txt = f"""💌 ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ sᴛᴀᴛᴜs...
+
+• ᴅᴀᴛᴀʙᴀsᴇ: ᴏɴʟɪɴᴇ
+• ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ: ʀᴇsᴘᴏɴsɪᴠᴇ
+• ʙᴏᴛ sᴇʀᴠᴇʀ: ʀᴜɴɴɪɴɢ sᴍᴏᴏᴛʜʟʏ
+• ʀᴇsᴘᴏɴsᴇ ᴛɪᴍᴇ: ᴏᴘᴛɪᴍᴀʟ
+• ᴀᴘɪ ᴘɪɴɢ: {delta_ping * 1000:.3f} ms   
+
+ᴇᴠᴇʀʏᴛʜɪɴɢ ʟᴏᴏᴋs ɢᴏᴏᴅ!
+"""
+    await q.answer(txt, show_alert=True)
 
 @app.on_callback_query(
     filters.regex(
