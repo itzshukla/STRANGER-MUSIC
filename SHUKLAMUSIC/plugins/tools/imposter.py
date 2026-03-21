@@ -20,7 +20,7 @@ from SHUKLAMUSIC.plugins.tools.pretenderdb import (
     add_userdata, get_userdata, usr_data
 )
 from SHUKLAMUSIC.utils.admin_filters import admin_filter
-form config import SHASHANK_IMG
+from config import SHASHANK_IMG
 
 
 
