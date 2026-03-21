@@ -1,6 +1,6 @@
 # -----------------------------------------------
 # 🔸 StrangerMusic Project
-# 🔹 Developed & Maintained by: Shashank Shukla (https://github.com/itzshukla)
+# 🔹 Developed & Maintained by: Shukla (https://github.com/itzshukla)
 # 📅 Copyright © 2022 – All Rights Reserved
 #
 # 📖 License:
@@ -65,14 +65,14 @@ class temp:
     B_NAME = None
 
 
-def circle(pfp, size=(535, 535), brightness_factor=10):
-    pfp = pfp.resize(size).convert("RGBA")
+def circle(pfp, size=(500, 500), brightness_factor=10):
+    pfp = pfp.resize(size, Image.LANCZOS).convert("RGBA")
     pfp = ImageEnhance.Brightness(pfp).enhance(brightness_factor)
     bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
     draw = ImageDraw.Draw(mask)
     draw.ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(pfp.size)
+    mask = mask.resize(pfp.size, Image.LANCZOS)
     mask = ImageChops.darker(mask, pfp.split()[-1])
     pfp.putalpha(mask)
     return pfp
@@ -82,11 +82,15 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     background = Image.open("SHUKLAMUSIC/assets/wel2.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor)
-    pfp = pfp.resize((535, 535))
+    pfp = pfp.resize((500, 500))
     draw = ImageDraw.Draw(background)
     font = ImageFont.truetype('SHUKLAMUSIC/assets/font.ttf', size=60)
-    draw.text((655, 465), f'ID: {id}', fill=(255, 255, 255), font=font)
-    pfp_position = (50, 90)
+    
+    # Updated ID position to (630, 450)
+    draw.text((630, 450), f'ID: {id}', fill=(255, 255, 255), font=font)
+    
+    # Updated PFP position to (48, 88)
+    pfp_position = (48, 88)
     background.paste(pfp, pfp_position, pfp)
     background.save(f"downloads/welcome#{id}.png")
     return f"downloads/welcome#{id}.png"
@@ -153,7 +157,8 @@ async def greet_new_member(_, member: ChatMemberUpdated):
                 chat_id,
                 photo=welcomeimg,
                 caption=f"""
-ㅤㅤ◦•●◉✿ ᴡᴇʟᴄᴏᴍᴇ ✿◉●•◦
+**⎊─────☵ ᴡᴇʟᴄᴏᴍᴇ ☵─────⎊**
+
 **▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
 
 **☉ ɴᴀᴍᴇ ⧽** {user.mention}
@@ -162,6 +167,8 @@ async def greet_new_member(_, member: ChatMemberUpdated):
 **☉ ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀs ⧽** {count}
 
 **▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
+
+**⎉──────▢✭ 侖 ✭▢──────⎉**
 """,
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton(button_text, url=deep_link)],
@@ -171,9 +178,12 @@ async def greet_new_member(_, member: ChatMemberUpdated):
 
             temp.MELCOW[f"welcome-{chat_id}"] = msg
 
-            # ✅ Auto-delete welcome message in 3 minutes
+            # Auto-delete welcome message in 5 minutes (300 seconds)
             await asyncio.sleep(300)
-            await msg.delete()
+            try:
+                await msg.delete()
+            except:
+                pass
 
         except Exception as e:
             LOGGER.error(e)
