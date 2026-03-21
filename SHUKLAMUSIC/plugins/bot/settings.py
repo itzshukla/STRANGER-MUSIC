@@ -48,6 +48,7 @@ from SHUKLAMUSIC.utils.inline.settings import (
 )
 from SHUKLAMUSIC.utils.inline.start import private_panel
 from config import BANNED_USERS, OWNER_ID
+import config
 
 
 @app.on_message(
@@ -99,6 +100,31 @@ async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
         return await CallbackQuery.edit_message_reply_markup(
             reply_markup=InlineKeyboardMarkup(buttons)
         )
+
+@app.on_callback_query(filters.regex("shiv_Shashank") & ~BANNED_USERS)
+@languageCB
+async def support(client, CallbackQuery, _):
+    await CallbackQuery.edit_message_text(
+        _["ABOUT_1"].format(app.mention),
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        text="sᴜᴘᴘᴏʀᴛ", url=config.SUPPORT_CHAT
+                    ),
+                    InlineKeyboardButton(
+                        text="ᴜᴘᴅᴀᴛᴇs", url=config.SUPPORT_CHANNEL
+                    ),
+
+                ],
+                [          
+                    InlineKeyboardButton(
+                        text="ʙᴀᴄᴋ", callback_data=f"settingsback_helper"
+                    )
+                ],
+            ]
+        ),
+    )
 
 
 @app.on_callback_query(
