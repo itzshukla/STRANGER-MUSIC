@@ -110,6 +110,11 @@ async def support(client, CallbackQuery, _):
         _["ABOUT_1"].format(app.mention),
         reply_markup=InlineKeyboardMarkup(
             [
+                [          
+                    InlineKeyboardButton(
+                        text="ʙᴏᴛ-ᴀᴘɪ-ɪɴғᴏ 💌", callback_data="api_status"
+                    )
+                ],
                 [
                     InlineKeyboardButton(
                         text="sᴜᴘᴘᴏʀᴛ", url=config.SUPPORT_CHAT
