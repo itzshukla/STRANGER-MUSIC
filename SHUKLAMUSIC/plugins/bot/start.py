@@ -39,6 +39,12 @@ from SHUKLAMUSIC.utils.inline import help_pannel, private_panel, start_panel
 from strings import get_string
 from config import BANNED_USERS, SHASHANK_IMG
 
+EFFECT_IDS = [
+    5046509860389126442,
+    5107584321108051014,
+    5104841245755180586,
+    5159385139981059251,
+]
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
 @LanguageStart
@@ -54,6 +60,7 @@ async def start_pm(client, message: Message, _):
                 random.choice(SHASHANK_IMG),
                 caption=_['help_1'].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
+                message_effect_id=random.choice(EFFECT_IDS),
             )
         elif name.startswith("sud"):
             await sudoers_list(client=client, message=message, _=_)
@@ -88,6 +95,7 @@ async def start_pm(client, message: Message, _):
                 photo=thumbnail,
                 caption=searched_text,
                 reply_markup=key,
+                message_effect_id=random.choice(EFFECT_IDS),
             )
             if await is_on_off(2):
                 await app.send_message(
@@ -103,6 +111,7 @@ async def start_pm(client, message: Message, _):
             random.choice(SHASHANK_IMG),
             caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM, served_users, served_chats),
             reply_markup=InlineKeyboardMarkup(out),
+            message_effect_id=random.choice(EFFECT_IDS),
         )
         if await is_on_off(2):
             await app.send_message(
@@ -119,6 +128,7 @@ async def start_gp(client, message: Message, _):
         random.choice(SHASHANK_IMG),
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
+        message_effect_id=random.choice(EFFECT_IDS),
     )
     return await add_served_chat(message.chat.id)
 
@@ -161,6 +171,7 @@ async def welcome(client, message: Message):
                         app.mention,
                     ),
                     reply_markup=InlineKeyboardMarkup(out),
+                    message_effect_id=random.choice(EFFECT_IDS),
                 )
                 await add_served_chat(message.chat.id)
                 await message.stop_propagation()
