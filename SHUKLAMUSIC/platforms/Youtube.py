@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------
-# 🔸 ShrutiMusic Api Youtube file.
+# 🔸 ShrutiMusic Api Youtube.py file.
 # 🔹 Developed & Maintained by: Nand Yaduvanshi (https://github.com/NoxxOP)
 # 📅 Copyright © 2025 – All Rights Reserved
-# ❤️ Made with dedication and love by NoxxOP
+# ❤️ Made with dedication and love by NoxxOP & itzshukla
 # ---------------------------------------------------------------
 
 import asyncio
@@ -12,16 +12,14 @@ from typing import Union
 import yt_dlp
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
+from py_yt import VideosSearch, Playlist
 from SHUKLAMUSIC.utils.formatters import time_to_seconds
 import aiohttp
 from SHUKLAMUSIC import LOGGER
 
-try:
-    from py_yt import VideosSearch
-except ImportError:
-    from youtubesearchpython.__future__ import VideosSearch
-
 API_URL = "https://shrutibots.site"
+DOWNLOAD_DIR = "downloads"
+
 
 async def download_song(link: str) -> str:
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
@@ -29,7 +27,6 @@ async def download_song(link: str) -> str:
     if not video_id or len(video_id) < 3:
         return None
 
-    DOWNLOAD_DIR = "downloads"
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
     file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.mp3")
 
@@ -39,7 +36,7 @@ async def download_song(link: str) -> str:
     try:
         async with aiohttp.ClientSession() as session:
             params = {"url": video_id, "type": "audio"}
-            
+
             async with session.get(
                 f"{API_URL}/download",
                 params=params,
@@ -50,12 +47,12 @@ async def download_song(link: str) -> str:
 
                 data = await response.json()
                 download_token = data.get("download_token")
-                
+
                 if not download_token:
                     return None
-                
+
                 stream_url = f"{API_URL}/stream/{video_id}?type=audio&token={download_token}"
-                
+
                 async with session.get(
                     stream_url,
                     timeout=aiohttp.ClientTimeout(total=300)
@@ -92,13 +89,13 @@ async def download_song(link: str) -> str:
                 pass
         return None
 
+
 async def download_video(link: str) -> str:
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
 
     if not video_id or len(video_id) < 3:
         return None
 
-    DOWNLOAD_DIR = "downloads"
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
     file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.mp4")
 
@@ -108,7 +105,7 @@ async def download_video(link: str) -> str:
     try:
         async with aiohttp.ClientSession() as session:
             params = {"url": video_id, "type": "video"}
-            
+
             async with session.get(
                 f"{API_URL}/download",
                 params=params,
@@ -119,12 +116,12 @@ async def download_video(link: str) -> str:
 
                 data = await response.json()
                 download_token = data.get("download_token")
-                
+
                 if not download_token:
                     return None
-                
+
                 stream_url = f"{API_URL}/stream/{video_id}?type=video&token={download_token}"
-                
+
                 async with session.get(
                     stream_url,
                     timeout=aiohttp.ClientTimeout(total=600)
@@ -161,19 +158,6 @@ async def download_video(link: str) -> str:
                 pass
         return None
 
-async def shell_cmd(cmd):
-    proc = await asyncio.create_subprocess_shell(
-        cmd,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    out, errorz = await proc.communicate()
-    if errorz:
-        if "unavailable videos are hidden" in (errorz.decode("utf-8")).lower():
-            return out.decode("utf-8")
-        else:
-            return errorz.decode("utf-8")
-    return out.decode("utf-8")
 
 class YouTubeAPI:
     def __init__(self):
@@ -264,14 +248,21 @@ class YouTubeAPI:
             link = self.listbase + link
         if "&" in link:
             link = link.split("&")[0]
-        playlist = await shell_cmd(
-            f"yt-dlp -i --get-id --flat-playlist --playlist-end {limit} --skip-download {link}"
-        )
         try:
-            result = [key for key in playlist.split("\n") if key]
+            plist = await Playlist.get(link)
         except:
-            result = []
-        return result
+            return []
+
+        videos = plist.get("videos") or []
+        ids = []
+        for data in videos[:limit]:
+            if not data:
+                continue
+            vid = data.get("id")
+            if not vid:
+                continue
+            ids.append(vid)
+        return ids
 
     async def track(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
@@ -353,7 +344,7 @@ class YouTubeAPI:
                 downloaded_file = await download_video(link)
             else:
                 downloaded_file = await download_song(link)
-            
+
             if downloaded_file:
                 return downloaded_file, True
             else:
