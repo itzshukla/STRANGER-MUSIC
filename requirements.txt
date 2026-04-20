@@ -33,7 +33,7 @@ lexica-api
 motor 
 numpy
 opencv-python
-pillow==9.5.0
+pillow==12.1.0
 psutil
 pickledb
 pycountry
