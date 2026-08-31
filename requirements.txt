@@ -61,7 +61,7 @@ spotipy
 telegraph
 tgcrypto
 unidecode
-uvloop==0.21.0; sys_platform != "win32"
+uvloop==0.22.1; sys_platform != "win32"
 wget
 youtube-search
 youtube-search-python
